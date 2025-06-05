@@ -1,0 +1,20 @@
+your_app/
+├── main.py                  # Entry point of your app
+├── requirements.txt         # List of dependencies
+├── README.md                # Project overview
+├── data/
+│   └── app_data.db          # SQLite database file
+├── ui/
+│   ├── main_window.ui       # Qt Designer .ui file
+│   └── ui_main_window.py    # Converted .py file (if using PyQt5)
+├── resources/
+│   └── logo.png             # Images, icons, etc.
+├── app/
+│   ├── __init__.py
+│   ├── logic.py             # Your business logic
+│   ├── database.py          # DB connection and queries
+│   └── ui_main.py           # UI class (wraps Designer UI)
+├── utils/
+│   └── helpers.py           # Utility functions
+├── env/ or venv/            # Virtual environment (not committed)
+└── launch_designer.bat      # Optional: Open Qt Designer
