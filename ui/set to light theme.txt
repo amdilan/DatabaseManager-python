@@ -1,0 +1,1 @@
+app = QtWidgets.QApplication(sys.argv + ['-platform', 'windows:darkmode=1'])

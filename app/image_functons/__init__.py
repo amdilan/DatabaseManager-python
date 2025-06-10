@@ -1,0 +1,1 @@
+from .scale_and_crop_center import ScaleAndCropCenter

@@ -1,1 +1,2 @@
-{\rtf1}
+from .config import *
+from .database import *

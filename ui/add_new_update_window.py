@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'AddNewUpdateWindow.ui'
+# Form implementation generated from reading ui file 'add_new_update_window.ui'
 #
 # Created by: PyQt6 UI code generator 6.4.2
 #
@@ -12,7 +12,9 @@ from PyQt6 import QtCore, QtGui, QtWidgets
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
-        Dialog.resize(650, 320)
+        Dialog.resize(650, 325)
+        Dialog.setMinimumSize(QtCore.QSize(650, 325))
+        Dialog.setMaximumSize(QtCore.QSize(650, 325))
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap("assets/folder.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         Dialog.setWindowIcon(icon)
@@ -74,7 +76,7 @@ class Ui_Dialog(object):
         self.dateEdit.setFont(font)
         self.dateEdit.setFrame(True)
         self.dateEdit.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-        self.dateEdit.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(2000, 1, 1), QtCore.QTime(18, 30, 0)))
+        self.dateEdit.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(2000, 1, 1), QtCore.QTime(7, 30, 0)))
         self.dateEdit.setMinimumDate(QtCore.QDate(2000, 1, 1))
         self.dateEdit.setCalendarPopup(True)
         self.dateEdit.setDate(QtCore.QDate(2000, 1, 1))

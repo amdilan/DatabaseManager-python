@@ -1,0 +1,1931 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>920</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>920</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="baseSize">
+   <size>
+    <width>920</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>DataBase Manager</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>assets/icon.png</normaloff>assets/icon.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="80,10,10">
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton_2">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>New Title</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="minimumSize">
+         <size>
+          <width>90</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>New Update</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="minimumSize">
+       <size>
+        <width>900</width>
+        <height>530</height>
+       </size>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab1">
+       <attribute name="title">
+        <string>Dashboard</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout" rowminimumheight="40,60">
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="groupBox">
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="title">
+           <string>Titles</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="50,50">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QLabel" name="label">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>All</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_2">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>On Going</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>On Hold</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Completed</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_5">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Abandoned</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_5">
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberT0">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberT1">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>170</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive/>
+                 <disabled/>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberT2">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>170</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive/>
+                 <disabled/>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberT3">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>85</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive/>
+                 <disabled/>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberT4">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>223</red>
+                     <green>149</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive/>
+                 <disabled/>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="title">
+           <string>Updates</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="50,50">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_6">
+             <item>
+              <widget class="QLabel" name="label_6">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>All</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_7">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Available</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_8">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Not Available</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_9">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>To Download</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_10">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Download Skipped</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_7">
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberU0">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberU1">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>170</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive/>
+                 <disabled/>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberU2">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive/>
+                 <disabled/>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberU3">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>223</red>
+                     <green>149</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive/>
+                 <disabled/>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberU4">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>170</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive/>
+                 <disabled/>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QGroupBox" name="groupBox_3">
+          <property name="font">
+           <font>
+            <pointsize>11</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="title">
+           <string>Titles' Updates</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="50,50">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_8">
+             <item>
+              <widget class="QLabel" name="label_11">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Available</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_12">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Played</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_13">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Playing</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_14">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Not Available</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="label_15">
+               <property name="minimumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>130</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="text">
+                <string>Finished</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_9">
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberTU0">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>170</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive/>
+                 <disabled/>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberTU1">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>170</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive/>
+                 <disabled/>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberTU2">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>223</red>
+                     <green>149</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive/>
+                 <disabled/>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberTU3">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>255</red>
+                     <green>0</green>
+                     <blue>0</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive/>
+                 <disabled/>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLCDNumber" name="lcdNumberTU4">
+               <property name="minimumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="baseSize">
+                <size>
+                 <width>80</width>
+                 <height>25</height>
+                </size>
+               </property>
+               <property name="palette">
+                <palette>
+                 <active>
+                  <colorrole role="WindowText">
+                   <brush brushstyle="SolidPattern">
+                    <color alpha="255">
+                     <red>0</red>
+                     <green>85</green>
+                     <blue>255</blue>
+                    </color>
+                   </brush>
+                  </colorrole>
+                 </active>
+                 <inactive/>
+                 <disabled/>
+                </palette>
+               </property>
+               <property name="font">
+                <font>
+                 <pointsize>11</pointsize>
+                 <bold>false</bold>
+                </font>
+               </property>
+               <property name="frameShape">
+                <enum>QFrame::NoFrame</enum>
+               </property>
+               <property name="frameShadow">
+                <enum>QFrame::Sunken</enum>
+               </property>
+               <property name="digitCount">
+                <number>6</number>
+               </property>
+               <property name="segmentStyle">
+                <enum>QLCDNumber::Flat</enum>
+               </property>
+               <property name="intValue" stdset="0">
+                <number>0</number>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="1" column="0" colspan="3">
+         <widget class="QScrollArea" name="scroll_area">
+          <property name="widgetResizable">
+           <bool>true</bool>
+          </property>
+          <widget class="QWidget" name="scrollAreaWidgetContents_layout">
+           <property name="geometry">
+            <rect>
+             <x>0</x>
+             <y>0</y>
+             <width>876</width>
+             <height>284</height>
+            </rect>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_10">
+            <item>
+             <widget class="QWidget" name="grid_widget" native="true">
+              <layout class="QGridLayout" name="grid_layout"/>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab2">
+       <attribute name="title">
+        <string>Titles</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_2">
+            <property name="minimumSize">
+             <size>
+              <width>500</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="placeholderText">
+             <string>Search ...</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableWidget">
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Sunken</enum>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="showDropIndicator" stdset="0">
+           <bool>false</bool>
+          </property>
+          <property name="dragDropOverwriteMode">
+           <bool>false</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::NoSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="textElideMode">
+           <enum>Qt::ElideNone</enum>
+          </property>
+          <property name="showGrid">
+           <bool>true</bool>
+          </property>
+          <property name="gridStyle">
+           <enum>Qt::SolidLine</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+          <property name="cornerButtonEnabled">
+           <bool>false</bool>
+          </property>
+          <property name="columnCount">
+           <number>8</number>
+          </property>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderHighlightSections">
+           <bool>false</bool>
+          </attribute>
+          <row>
+           <property name="text">
+            <string>New Row</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>New Row</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>New Row</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column/>
+          <column/>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab3">
+       <attribute name="title">
+        <string>Updates</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEdit_3">
+            <property name="minimumSize">
+             <size>
+              <width>500</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>10</pointsize>
+             </font>
+            </property>
+            <property name="placeholderText">
+             <string>Search ...</string>
+            </property>
+            <property name="clearButtonEnabled">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableWidget_2">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::NoSelection</enum>
+          </property>
+          <property name="textElideMode">
+           <enum>Qt::ElideNone</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <property name="cornerButtonEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderHighlightSections">
+           <bool>false</bool>
+          </attribute>
+          <row>
+           <property name="text">
+            <string>New Row</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>New Row</string>
+           </property>
+          </row>
+          <row>
+           <property name="text">
+            <string>New Row</string>
+           </property>
+          </row>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>New Column</string>
+           </property>
+          </column>
+          <item row="0" column="3">
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>920</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionDevelopers"/>
+    <addaction name="actionTitles"/>
+    <addaction name="separator"/>
+    <addaction name="actionDatabase"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionDark_Theme"/>
+    <addaction name="separator"/>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit        </string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::WindowShortcut</enum>
+   </property>
+  </action>
+  <action name="actionDark_Theme">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Dark Theme</string>
+   </property>
+   <property name="shortcutContext">
+    <enum>Qt::ApplicationShortcut</enum>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionDevelopers">
+   <property name="text">
+    <string>Developers</string>
+   </property>
+  </action>
+  <action name="actionTitles">
+   <property name="text">
+    <string>Titles</string>
+   </property>
+  </action>
+  <action name="actionDatabase">
+   <property name="text">
+    <string>Database</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>459</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

@@ -1,0 +1,5 @@
+python 3.11 [cumpulsory]
+pyqt6
+pyqt6-tools
+pyqtdarktheme
+qt-material
