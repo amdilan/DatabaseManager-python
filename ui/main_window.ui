@@ -50,7 +50,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="pushButtonNewTitle">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -74,7 +74,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pushButtonNewUpdate">
         <property name="minimumSize">
          <size>
           <width>90</width>
@@ -100,6 +100,11 @@
         <width>900</width>
         <height>530</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="currentIndex">
        <number>0</number>
@@ -1103,7 +1108,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Played</string>
+                <string>Playing</string>
                </property>
               </widget>
              </item>
@@ -1134,7 +1139,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Playing</string>
+                <string>Not Played</string>
                </property>
               </widget>
              </item>
@@ -1196,7 +1201,7 @@
                 </font>
                </property>
                <property name="text">
-                <string>Finished</string>
+                <string>Played</string>
                </property>
               </widget>
              </item>
@@ -1520,7 +1525,7 @@
              <x>0</x>
              <y>0</y>
              <width>876</width>
-             <height>284</height>
+             <height>283</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -1556,7 +1561,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_2">
+           <widget class="QLineEdit" name="lineEditSearchTitle">
             <property name="minimumSize">
              <size>
               <width>500</width>
@@ -1589,10 +1594,32 @@
             </property>
            </spacer>
           </item>
+          <item>
+           <widget class="QToolButton" name="toolButtonRefreshTitle">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>assets/refresh.png</normaloff>assets/refresh.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>18</width>
+              <height>18</height>
+             </size>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
-         <widget class="QTableWidget" name="tableWidget">
+         <widget class="QTableWidget" name="tableWidgetTitles">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="frameShape">
            <enum>QFrame::StyledPanel</enum>
           </property>
@@ -1630,10 +1657,10 @@
            <bool>true</bool>
           </property>
           <property name="cornerButtonEnabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="columnCount">
-           <number>8</number>
+           <number>0</number>
           </property>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -1641,53 +1668,6 @@
           <attribute name="verticalHeaderHighlightSections">
            <bool>false</bool>
           </attribute>
-          <row>
-           <property name="text">
-            <string>New Row</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>New Row</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>New Row</string>
-           </property>
-          </row>
-          <column>
-           <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
-          <column/>
-          <column/>
          </widget>
         </item>
        </layout>
@@ -1713,7 +1693,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_3">
+           <widget class="QLineEdit" name="lineEditSearchUpdate">
             <property name="minimumSize">
              <size>
               <width>500</width>
@@ -1746,10 +1726,32 @@
             </property>
            </spacer>
           </item>
+          <item>
+           <widget class="QToolButton" name="toolButtonRefreshUpdate">
+            <property name="text">
+             <string notr="true"/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>assets/refresh.png</normaloff>assets/refresh.png</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>18</width>
+              <height>18</height>
+             </size>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
-         <widget class="QTableWidget" name="tableWidget_2">
+         <widget class="QTableWidget" name="tableWidgetUpdate">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
           </property>
@@ -1765,62 +1767,18 @@
           <property name="cornerButtonEnabled">
            <bool>true</bool>
           </property>
+          <property name="rowCount">
+           <number>0</number>
+          </property>
+          <property name="columnCount">
+           <number>0</number>
+          </property>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
           </attribute>
           <attribute name="verticalHeaderHighlightSections">
            <bool>false</bool>
           </attribute>
-          <row>
-           <property name="text">
-            <string>New Row</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>New Row</string>
-           </property>
-          </row>
-          <row>
-           <property name="text">
-            <string>New Row</string>
-           </property>
-          </row>
-          <column>
-           <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>New Column</string>
-           </property>
-          </column>
-          <item row="0" column="3">
-           <property name="text">
-            <string/>
-           </property>
-          </item>
          </widget>
         </item>
        </layout>
@@ -1849,15 +1807,14 @@
      <string>Edit</string>
     </property>
     <addaction name="actionDevelopers"/>
-    <addaction name="actionTitles"/>
+    <addaction name="actionPlatforms"/>
     <addaction name="separator"/>
-    <addaction name="actionDatabase"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="actionDark_Theme"/>
+    <addaction name="actionTheme"/>
     <addaction name="separator"/>
     <addaction name="actionAbout"/>
    </widget>
@@ -1877,7 +1834,7 @@
     <enum>Qt::WindowShortcut</enum>
    </property>
   </action>
-  <action name="actionDark_Theme">
+  <action name="actionTheme">
    <property name="checkable">
     <bool>true</bool>
    </property>
@@ -1906,6 +1863,11 @@
   <action name="actionDatabase">
    <property name="text">
     <string>Database</string>
+   </property>
+  </action>
+  <action name="actionPlatforms">
+   <property name="text">
+    <string>Platforms</string>
    </property>
   </action>
  </widget>

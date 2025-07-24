@@ -3,12 +3,12 @@ import sys
 import configparser
 from PyQt6 import QtWidgets
 
-CONFIG_FILE = "../../data/config.ini"
+# CONFIG_FILE = "../../data/config.ini"
 
 def ConfigRead():
     print("test read")
 
-def ReadConfigTheme():
+def ReadConfigTheme(CONFIG_FILE):
     config = configparser.ConfigParser()
     config.read(CONFIG_FILE)
     return config.get("Appearance", "theme", fallback="light").lower()

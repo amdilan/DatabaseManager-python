@@ -1,0 +1,145 @@
+CREATE TABLE `titles` (`id` INT(7) NOT NULL AUTO_INCREMENT PRIMARY KEY , `name` VARCHAR(512) NOT NULL , `released` DATE NOT NULL , `source` VARCHAR(512) NOT NULL , `link` VARCHAR(512) NOT NULL , `comment` VARCHAR(512) NULL , `developer` INT(7) NOT NULL , `developer2` INT(7) NULL , `status` INT(5) NOT NULL , `availability` INT(5) NOT NULL , `platform` INT(5) NOT NULL ) ENGINE = InnoDB;
+
+CREATE TABLE `developers` (`id` INT(7) NOT NULL AUTO_INCREMENT PRIMARY KEY , `developer` VARCHAR(512) NOT NULL , `alias` VARCHAR(512) NOT NULL , `link` VARCHAR(512) NULL ) ENGINE = InnoDB;
+
+CREATE TABLE `availability` (`id` INT(5) NOT NULL PRIMARY KEY , `status` VARCHAR(50) NOT NULL ) ENGINE = InnoDB;
+
+CREATE TABLE `title_status` (`id` INT(5) NOT NULL PRIMARY KEY , `status` VARCHAR(50) NOT NULL ) ENGINE = InnoDB;
+
+CREATE TABLE `platform` (`id` INT(5) NOT NULL PRIMARY KEY , `platform` VARCHAR(50) NOT NULL ) ENGINE = InnoDB;
+
+CREATE TABLE `updates` (`id` INT(7) NOT NULL  PRIMARY KEY , `title_id` INT(7) NOT NULL , `update_name` VARCHAR(512) NOT NULL , `released` DATE NOT NULL , `update_status` INT(5) NOT NULL , `playing_status` INT(5) NOT NULL , `comment` VARCHAR(512) NULL ) ENGINE = InnoDB;
+
+CREATE TABLE `update_status` (`id` INT(5) NOT NULL PRIMARY KEY , `status` VARCHAR(50) NOT NULL ) ENGINE = InnoDB;
+
+CREATE TABLE `playing_status` (`id` INT(5) NOT NULL PRIMARY KEY , `status` VARCHAR(50) NOT NULL ) ENGINE = InnoDB;
+
+ALTER TABLE `titles` ADD CONSTRAINT `fk_dev` FOREIGN KEY (`developer`) REFERENCES `developers`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `titles` ADD CONSTRAINT `fk_dev2` FOREIGN KEY (`developer`) REFERENCES `developers`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `titles` ADD CONSTRAINT `fk_plat` FOREIGN KEY (`platform`) REFERENCES `platform`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `titles` ADD CONSTRAINT `fk_status` FOREIGN KEY (`status`) REFERENCES `title_status`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `titles` ADD CONSTRAINT `fk_avail` FOREIGN KEY (`availability`) REFERENCES `availability`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `updates` ADD CONSTRAINT `fk_title` FOREIGN KEY (`title_id`) REFERENCES `titles`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `updates` ADD CONSTRAINT `fk_statusupdate` FOREIGN KEY (`update_status`) REFERENCES `update_status`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `updates` ADD CONSTRAINT `fk_playstat` FOREIGN KEY (`playing_status`) REFERENCES `playing_status`(`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+
+CREATE TABLE `titles` (
+    `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `name` TEXT NOT NULL,
+    `released` TEXT NOT NULL,
+    `source` TEXT NOT NULL,
+    `link` TEXT NOT NULL,
+    `comment` TEXT,
+    `developer` INTEGER NOT NULL,
+    `developer2` INTEGER,
+    `status` INTEGER NOT NULL,
+    `availability` INTEGER NOT NULL,
+    `platform` INTEGER NOT NULL,
+    FOREIGN KEY (`developer`) REFERENCES `developers`(`id`),
+    FOREIGN KEY (`developer2`) REFERENCES `developers`(`id`),
+    FOREIGN KEY (`platform`) REFERENCES `platform`(`id`),
+    FOREIGN KEY (`status`) REFERENCES `title_status`(`id`),
+    FOREIGN KEY (`availability`) REFERENCES `availability`(`id`)
+);
+
+CREATE TABLE `developers` (
+    `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `developer` TEXT NOT NULL,
+    `alias` TEXT,
+    `link` TEXT
+);
+
+CREATE TABLE `availability` (
+    `id` INTEGER NOT NULL PRIMARY KEY,
+    `status` TEXT NOT NULL
+);
+
+CREATE TABLE `title_status` (
+    `id` INTEGER NOT NULL PRIMARY KEY,
+    `status` TEXT NOT NULL
+);
+
+CREATE TABLE `platform` (
+    `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `platform` TEXT NOT NULL
+);
+
+CREATE TABLE `updates` (
+    `id` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `title_id` INTEGER NOT NULL,
+    `update_name` TEXT NOT NULL,
+    `released` TEXT NOT NULL,
+    `update_status` INTEGER NOT NULL,
+    `playing_status` INTEGER NOT NULL,
+    `comment` TEXT,
+    FOREIGN KEY (`title_id`) REFERENCES `titles`(`id`),
+    FOREIGN KEY (`update_status`) REFERENCES `update_status`(`id`),
+    FOREIGN KEY (`playing_status`) REFERENCES `playing_status`(`id`)
+);
+
+CREATE TABLE `update_status` (
+    `id` INTEGER NOT NULL PRIMARY KEY,
+    `status` TEXT NOT NULL
+);
+
+CREATE TABLE `playing_status` (
+    `id` INTEGER NOT NULL PRIMARY KEY,
+    `status` TEXT NOT NULL
+);
+
+-- Note: SQLite requires foreign keys to be enabled at runtime
+PRAGMA foreign_keys = ON;
+
+-- 1. Trigger for new updates with status 1
+CREATE TRIGGER update_title_availability_insert
+AFTER INSERT ON updates
+FOR EACH ROW
+WHEN NEW.update_status = 1
+BEGIN
+    UPDATE titles
+    SET availability = 1
+    WHERE id = NEW.title_id;
+END;
+
+-- 2. Trigger when updates are changed to status 1
+CREATE TRIGGER update_title_availability_update
+AFTER UPDATE OF update_status ON updates
+FOR EACH ROW
+WHEN NEW.update_status = 1
+BEGIN
+    UPDATE titles
+    SET availability = 1
+    WHERE id = NEW.title_id;
+END;
+
+-- 3. Trigger when updates with status 1 are deleted
+CREATE TRIGGER update_availability_after_delete
+AFTER DELETE ON updates
+FOR EACH ROW
+WHEN OLD.update_status = 1
+BEGIN
+    -- Set availability to 0 if no more updates with status 1 exist
+    UPDATE titles
+    SET availability = CASE 
+        WHEN (SELECT COUNT(*) FROM updates WHERE title_id = OLD.title_id AND update_status = 1) = 0 THEN 0
+        ELSE 1
+    END
+    WHERE id = OLD.title_id;
+END;
+
+-- 4. Trigger when updates are changed from status 1 to something else
+CREATE TRIGGER update_availability_status_change
+AFTER UPDATE OF update_status ON updates
+FOR EACH ROW
+WHEN OLD.update_status = 1 AND NEW.update_status != 1
+BEGIN
+    -- Set availability to 0 if no more updates with status 1 exist
+    UPDATE titles
+    SET availability = CASE 
+        WHEN (SELECT COUNT(*) FROM updates WHERE title_id = NEW.title_id AND update_status = 1) = 0 THEN 0
+        ELSE 1
+    END
+    WHERE id = NEW.title_id;
+END;

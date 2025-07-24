@@ -1,42 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>NewUpdateDialog</class>
- <widget class="QDialog" name="NewUpdateDialog">
+ <class>EditTitleDialog</class>
+ <widget class="QDialog" name="EditTitleDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>650</width>
-    <height>325</height>
+    <height>415</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="minimumSize">
    <size>
     <width>650</width>
-    <height>325</height>
+    <height>415</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>650</width>
-    <height>325</height>
+    <height>415</height>
    </size>
   </property>
+  <property name="font">
+   <font>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
   <property name="windowTitle">
-   <string>Add New Update</string>
+   <string>Edit Title</string>
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>assets/folder.png</normaloff>assets/folder.png</iconset>
+    <normaloff>assets/drawer.png</normaloff>assets/drawer.png</iconset>
+  </property>
+  <property name="sizeGripEnabled">
+   <bool>false</bool>
+  </property>
+  <property name="modal">
+   <bool>false</bool>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
     <rect>
      <x>290</x>
-     <y>280</y>
+     <y>370</y>
      <width>341</width>
      <height>32</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
@@ -45,7 +67,7 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QLineEdit" name="lineEditTitle">
    <property name="geometry">
     <rect>
      <x>130</x>
@@ -59,54 +81,38 @@
      <pointsize>11</pointsize>
     </font>
    </property>
-   <property name="editable">
-    <bool>true</bool>
-   </property>
-   <property name="currentText">
+   <property name="text">
     <string/>
    </property>
-   <property name="insertPolicy">
-    <enum>QComboBox::NoInsert</enum>
-   </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QLineEdit" name="lineEditSRC">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>140</y>
-     <width>111</width>
+     <x>130</x>
+     <y>230</y>
+     <width>500</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEditLink">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>260</y>
+     <width>500</width>
      <height>22</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <family>Segoe UI</family>
      <pointsize>11</pointsize>
-     <bold>false</bold>
     </font>
-   </property>
-   <property name="text">
-    <string>Availability</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_7">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>200</y>
-     <width>111</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Segoe UI</family>
-     <pointsize>11</pointsize>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Comments</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -129,26 +135,6 @@
     <string>Title</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_6">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>110</y>
-     <width>111</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <family>Segoe UI</family>
-     <pointsize>11</pointsize>
-     <bold>false</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Updated Date</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
@@ -166,15 +152,35 @@
     </font>
    </property>
    <property name="text">
-    <string>Version</string>
+    <string>Developer</string>
    </property>
   </widget>
-  <widget class="QDateEdit" name="dateEditRel">
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>170</y>
+     <width>111</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>11</pointsize>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Release Date</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBoxDevs">
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>110</y>
-     <width>110</width>
+     <y>80</y>
+     <width>473</width>
      <height>22</height>
     </rect>
    </property>
@@ -183,21 +189,50 @@
      <pointsize>11</pointsize>
     </font>
    </property>
+   <property name="placeholderText">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>230</y>
+     <width>111</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>11</pointsize>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Source</string>
+   </property>
+  </widget>
+  <widget class="QDateEdit" name="dateEditRel">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>170</y>
+     <width>110</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+     <bold>false</bold>
+    </font>
+   </property>
    <property name="frame">
     <bool>true</bool>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
-   </property>
-   <property name="minimumDateTime">
-    <datetime>
-     <hour>0</hour>
-     <minute>0</minute>
-     <second>0</second>
-     <year>2000</year>
-     <month>1</month>
-     <day>1</day>
-    </datetime>
    </property>
    <property name="minimumDate">
     <date>
@@ -220,12 +255,52 @@
     </date>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEditName">
+  <widget class="QLabel" name="label_5">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>260</y>
+     <width>111</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>11</pointsize>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Web Link</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_6">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>140</y>
+     <width>111</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>11</pointsize>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Engine</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBoxPlatforms">
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>80</y>
-     <width>500</width>
+     <y>140</y>
+     <width>250</width>
      <height>22</height>
     </rect>
    </property>
@@ -234,12 +309,35 @@
      <pointsize>11</pointsize>
     </font>
    </property>
+   <property name="placeholderText">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_7">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>290</y>
+     <width>111</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>11</pointsize>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Comments</string>
+   </property>
   </widget>
   <widget class="QPlainTextEdit" name="plainTextEditComment">
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>200</y>
+     <y>290</y>
      <width>500</width>
      <height>66</height>
     </rect>
@@ -256,16 +354,11 @@
   <widget class="QCheckBox" name="checkBoxRel">
    <property name="geometry">
     <rect>
-     <x>249</x>
-     <y>111</y>
+     <x>250</x>
+     <y>171</y>
      <width>51</width>
      <height>20</height>
     </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>10</pointsize>
-    </font>
    </property>
    <property name="toolTip">
     <string>Check if date not available</string>
@@ -277,11 +370,11 @@
     <string>N/A</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5">
+  <widget class="QLabel" name="label_8">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>170</y>
+     <y>200</y>
      <width>111</width>
      <height>22</height>
     </rect>
@@ -294,83 +387,19 @@
     </font>
    </property>
    <property name="text">
-    <string>Status</string>
+    <string>Dev. Status</string>
    </property>
   </widget>
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>160</y>
-     <width>361</width>
-     <height>40</height>
-    </rect>
-   </property>
-   <widget class="QRadioButton" name="radioButtonP_NP">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>10</y>
-      <width>100</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Not Started</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButtonP_P">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>10</y>
-      <width>100</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Playing</string>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButtonP_PD">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>100</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>11</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Played</string>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QWidget" name="widget_2" native="true">
-   <property name="geometry">
-    <rect>
-     <x>130</x>
-     <y>130</y>
+     <y>190</y>
      <width>501</width>
      <height>40</height>
     </rect>
    </property>
-   <widget class="QRadioButton" name="radioButtonU_A">
+   <widget class="QRadioButton" name="radioButtonOG">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -385,10 +414,10 @@
      </font>
     </property>
     <property name="text">
-     <string>Available</string>
+     <string>On Going</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButtonU_NA">
+   <widget class="QRadioButton" name="radioButtonOH">
     <property name="geometry">
      <rect>
       <x>120</x>
@@ -403,15 +432,15 @@
      </font>
     </property>
     <property name="text">
-     <string>N / A</string>
+     <string>On Hold</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButtonU_TD">
+   <widget class="QRadioButton" name="radioButtonC">
     <property name="geometry">
      <rect>
-      <x>220</x>
+      <x>230</x>
       <y>10</y>
-      <width>110</width>
+      <width>100</width>
       <height>20</height>
      </rect>
     </property>
@@ -421,15 +450,15 @@
      </font>
     </property>
     <property name="text">
-     <string>To Download</string>
+     <string>Completed</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButtonU_DS">
+   <widget class="QRadioButton" name="radioButtonA">
     <property name="geometry">
      <rect>
-      <x>350</x>
+      <x>340</x>
       <y>10</y>
-      <width>151</width>
+      <width>100</width>
       <height>20</height>
      </rect>
     </property>
@@ -439,15 +468,15 @@
      </font>
     </property>
     <property name="text">
-     <string>Download Skipped</string>
+     <string>Abandoned</string>
     </property>
    </widget>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="label_9">
    <property name="geometry">
     <rect>
      <x>20</x>
-     <y>20</y>
+     <y>110</y>
      <width>111</width>
      <height>22</height>
     </rect>
@@ -460,7 +489,25 @@
     </font>
    </property>
    <property name="text">
-    <string>Title ID</string>
+    <string>Developer 2</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBoxDevs_2">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>110</y>
+     <width>473</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
+   </property>
+   <property name="placeholderText">
+    <string/>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEditID">
@@ -493,20 +540,62 @@
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QLabel" name="label_10">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>20</y>
+     <width>111</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Segoe UI</family>
+     <pointsize>11</pointsize>
+     <bold>false</bold>
+    </font>
+   </property>
+   <property name="text">
+    <string>Title ID</string>
+   </property>
+  </widget>
+  <zorder>lineEditSRC</zorder>
+  <zorder>buttonBox</zorder>
+  <zorder>lineEditTitle</zorder>
+  <zorder>lineEditLink</zorder>
+  <zorder>label</zorder>
+  <zorder>label_2</zorder>
+  <zorder>label_3</zorder>
+  <zorder>comboBoxDevs</zorder>
+  <zorder>label_4</zorder>
+  <zorder>dateEditRel</zorder>
+  <zorder>label_5</zorder>
+  <zorder>label_6</zorder>
+  <zorder>comboBoxPlatforms</zorder>
+  <zorder>label_7</zorder>
+  <zorder>plainTextEditComment</zorder>
+  <zorder>checkBoxRel</zorder>
+  <zorder>label_8</zorder>
+  <zorder>widget</zorder>
+  <zorder>label_9</zorder>
+  <zorder>comboBoxDevs_2</zorder>
+  <zorder>lineEditID</zorder>
+  <zorder>label_10</zorder>
  </widget>
  <tabstops>
-  <tabstop>lineEditID</tabstop>
-  <tabstop>comboBox</tabstop>
-  <tabstop>lineEditName</tabstop>
+  <tabstop>lineEditTitle</tabstop>
+  <tabstop>comboBoxDevs</tabstop>
+  <tabstop>comboBoxDevs_2</tabstop>
+  <tabstop>comboBoxPlatforms</tabstop>
   <tabstop>dateEditRel</tabstop>
   <tabstop>checkBoxRel</tabstop>
-  <tabstop>radioButtonU_A</tabstop>
-  <tabstop>radioButtonU_NA</tabstop>
-  <tabstop>radioButtonU_TD</tabstop>
-  <tabstop>radioButtonU_DS</tabstop>
-  <tabstop>radioButtonP_PD</tabstop>
-  <tabstop>radioButtonP_P</tabstop>
-  <tabstop>radioButtonP_NP</tabstop>
+  <tabstop>radioButtonOG</tabstop>
+  <tabstop>radioButtonOH</tabstop>
+  <tabstop>radioButtonC</tabstop>
+  <tabstop>radioButtonA</tabstop>
+  <tabstop>lineEditSRC</tabstop>
+  <tabstop>lineEditLink</tabstop>
   <tabstop>plainTextEditComment</tabstop>
  </tabstops>
  <resources/>
@@ -514,7 +603,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>NewUpdateDialog</receiver>
+   <receiver>EditTitleDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

@@ -3,12 +3,12 @@ import sys
 import configparser
 from PyQt6 import QtWidgets
 
-CONFIG_FILE = "./data/config.ini"
+# CONFIG_FILE = "./data/config.ini"
 
 def ConfigWrite():
     print("test write")
     
-def WriteConfigTheme(theme):
+def WriteConfigTheme(CONFIG_FILE, theme):
     config = configparser.ConfigParser()
     config["Appearance"] = {"theme": theme}
     with open(CONFIG_FILE, "w") as f:

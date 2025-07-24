@@ -1,2 +1,3 @@
-from .config_read import ConfigRead
-from .config_write import ConfigWrite
+from .config_read import ReadConfigTheme
+from .config_write import WriteConfigTheme
+from .setTheme import *
