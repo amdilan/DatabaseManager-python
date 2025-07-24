@@ -7,6 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+import app
 
 
 class Ui_EditUpdateDialog(object):
@@ -16,7 +17,7 @@ class Ui_EditUpdateDialog(object):
         EditUpdateDialog.setMinimumSize(QtCore.QSize(650, 325))
         EditUpdateDialog.setMaximumSize(QtCore.QSize(650, 325))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui\\assets/folder.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap(app.resource_path("ui\\assets\\folder.png")), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         EditUpdateDialog.setWindowIcon(icon)
         self.buttonBox = QtWidgets.QDialogButtonBox(parent=EditUpdateDialog)
         self.buttonBox.setGeometry(QtCore.QRect(290, 280, 341, 32))

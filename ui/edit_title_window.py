@@ -7,6 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+import app
 
 
 class Ui_EditTitleDialog(object):
@@ -24,7 +25,7 @@ class Ui_EditTitleDialog(object):
         font.setPointSize(10)
         EditTitleDialog.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui\\assets/drawer.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap(app.resource_path("ui\\assets\\drawer.png")), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         EditTitleDialog.setWindowIcon(icon)
         EditTitleDialog.setSizeGripEnabled(False)
         EditTitleDialog.setModal(False)

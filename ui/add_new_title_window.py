@@ -7,6 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+import app
 
 
 class Ui_NewTitleDialog(object):
@@ -24,7 +25,7 @@ class Ui_NewTitleDialog(object):
         font.setPointSize(10)
         NewTitleDialog.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui\\assets/drawer.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap(app.resource_path("ui\\assets\\drawer.png")), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         NewTitleDialog.setWindowIcon(icon)
         NewTitleDialog.setSizeGripEnabled(False)
         NewTitleDialog.setModal(False)
@@ -114,7 +115,7 @@ class Ui_NewTitleDialog(object):
         self.pushButton.setFont(font)
         self.pushButton.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("ui\\assets/add-dev.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap(app.resource_path("ui\\assets\\add-dev.png")), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.pushButton.setIcon(icon1)
         self.pushButton.setObjectName("pushButton")
         self.label_5 = QtWidgets.QLabel(parent=NewTitleDialog)

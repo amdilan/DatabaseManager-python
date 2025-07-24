@@ -7,7 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-
+import app
 
 class Ui_DevDialog(object):
     def setupUi(self, DevDialog):
@@ -24,7 +24,7 @@ class Ui_DevDialog(object):
         font.setPointSize(10)
         DevDialog.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui\\assets/drawer.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap(app.resource_path("ui\\assets\\drawer.png")), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         DevDialog.setWindowIcon(icon)
         self.lineEditDev = QtWidgets.QLineEdit(parent=DevDialog)
         self.lineEditDev.setGeometry(QtCore.QRect(20, 210, 311, 21))

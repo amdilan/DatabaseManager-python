@@ -7,6 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+import app
 
 
 class Ui_PlatformDialog(object):
@@ -24,7 +25,7 @@ class Ui_PlatformDialog(object):
         font.setPointSize(10)
         PlatformDialog.setFont(font)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui\\assets/drawer.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap(app.resource_path("ui\\assets\\drawer.png")), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         PlatformDialog.setWindowIcon(icon)
         self.listWidgetPlat = QtWidgets.QListWidget(parent=PlatformDialog)
         self.listWidgetPlat.setGeometry(QtCore.QRect(20, 30, 271, 151))

@@ -7,6 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
+import app
 
 
 class Ui_MainWindow(object):
@@ -17,7 +18,7 @@ class Ui_MainWindow(object):
         MainWindow.setMinimumSize(QtCore.QSize(920, 600))
         MainWindow.setBaseSize(QtCore.QSize(920, 600))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("ui\\assets/icon.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap(app.resource_path("ui\\assets\\icon.png")), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         MainWindow.setWindowIcon(icon)
         self.centralwidget = QtWidgets.QWidget(parent=MainWindow)
         self.centralwidget.setObjectName("centralwidget")
@@ -590,7 +591,7 @@ class Ui_MainWindow(object):
         self.toolButtonRefreshTitle = QtWidgets.QToolButton(parent=self.tab2)
         self.toolButtonRefreshTitle.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("ui\\assets/refresh.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap(app.resource_path("ui\\assets\\refresh.png")), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.toolButtonRefreshTitle.setIcon(icon1)
         self.toolButtonRefreshTitle.setIconSize(QtCore.QSize(18, 18))
         self.toolButtonRefreshTitle.setObjectName("toolButtonRefreshTitle")
