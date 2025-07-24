@@ -29,7 +29,7 @@ class NewTitleDialog(QtWidgets.QDialog, Ui_NewTitleDialog):
         self.PopulateDevs()
         self.PopulatePlatforms()
         
-        self.pushButton.clicked.connect(app.MainWindow.HandleMenuDevs)
+        self.pushButton.clicked.connect(self.HandleAddDev)
         
         self.radioButtonOG.toggled.connect(self.SelectRadio)
         self.radioButtonC.toggled.connect(self.SelectRadio)
@@ -39,6 +39,11 @@ class NewTitleDialog(QtWidgets.QDialog, Ui_NewTitleDialog):
         self.dateEditRel.dateChanged.connect(self.HandleRel)
         
         self.buttonBox.accepted.connect(self.Validate)
+               
+    def HandleAddDev(self):
+        dlg = app.DevDialog()
+        dlg.exec()
+        self.PopulateDevs()
                
     def PopulateDevs(self):
         devs = app.GetDevsOrdered(DB)
