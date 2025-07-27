@@ -198,9 +198,9 @@ def InitializeDB(dblocation):
         
         for x in query:
             cursor.execute(query[x])
-            print(query[x])
+            # print(query[x])
         connection.commit()
-        print("Tables created successfully!")
+        # print("Tables created successfully!")
         
     
 def name(args):

@@ -6,7 +6,8 @@ from PyQt6 import QtWidgets
 # CONFIG_FILE = "./data/config.ini"
 
 def ConfigWrite():
-    print("test write")
+    # print("test write")
+    pass
     
 def WriteConfigTheme(CONFIG_FILE, theme):
     config = configparser.ConfigParser()

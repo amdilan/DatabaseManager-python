@@ -49,7 +49,7 @@ class NewTitleDialog(QtWidgets.QDialog, Ui_NewTitleDialog):
         devs = app.GetDevsOrdered(DB)
         self.comboBoxDevs.clear()
         self.comboBoxDevs.setPlaceholderText(' ')
-        print(devs)
+        # print(devs)
         for row in devs:
             dev_row = None            
             if row[2]:
@@ -90,7 +90,7 @@ class NewTitleDialog(QtWidgets.QDialog, Ui_NewTitleDialog):
             self.Rel = self.dateEditRel.date().toString('yyyy-MM-dd')
                     
     def HandleSubmit(self):        
-        print('Submitted')
+        # print('Submitted')
         self.data['title'] = self.lineEditTitle.text()
         self.data['dev'] = self.comboBoxDevs.itemData(self.comboBoxDevs.currentIndex())[0]
         if not(self.comboBoxDevs_2.currentIndex() == -1):
@@ -102,7 +102,7 @@ class NewTitleDialog(QtWidgets.QDialog, Ui_NewTitleDialog):
         self.data['link'] = self.lineEditLink.text()
         self.data['status'] = self.status
         self.data['comment'] = self.plainTextEditComment.toPlainText()
-        print(self.data)
+        # print(self.data)
         result = app.AddTitles(DB, self.data)
         
         dlg = QtWidgets.QMessageBox(self)
@@ -120,15 +120,15 @@ class NewTitleDialog(QtWidgets.QDialog, Ui_NewTitleDialog):
             dlg.exec()
         
     def Validate(self):                
-        print( self.dateEditRel.date().toPyDate(),not((self.dateEditRel.date().toString('yyyy-MM-dd') != '2000-01-01') or (self.checkBoxRel.isChecked())))
-        print(f"Title: {self.lineEditTitle.text()}")
-        print(f"Dev: {self.comboBoxDevs.currentIndex()}")
-        print(f"Plat: {self.comboBoxPlatforms.currentIndex()}")
-        print(f"Rel: {self.dateEditRel.date().toString('yyyy-MM-dd')} N/A: {self.checkBoxRel.isChecked()}")
-        print(f"Status: {self.plainTextEditComment.toPlainText()}")
-        print(f"Source: {self.lineEditSRC.text()}")
-        print(f"Link: {self.lineEditLink.text()}")
-        print(f"comment: {self.plainTextEditComment.toPlainText()}")
+        # print( self.dateEditRel.date().toPyDate(),not((self.dateEditRel.date().toString('yyyy-MM-dd') != '2000-01-01') or (self.checkBoxRel.isChecked())))
+        # print(f"Title: {self.lineEditTitle.text()}")
+        # print(f"Dev: {self.comboBoxDevs.currentIndex()}")
+        # print(f"Plat: {self.comboBoxPlatforms.currentIndex()}")
+        # print(f"Rel: {self.dateEditRel.date().toString('yyyy-MM-dd')} N/A: {self.checkBoxRel.isChecked()}")
+        # print(f"Status: {self.plainTextEditComment.toPlainText()}")
+        # print(f"Source: {self.lineEditSRC.text()}")
+        # print(f"Link: {self.lineEditLink.text()}")
+        # print(f"comment: {self.plainTextEditComment.toPlainText()}")
         
         dev1 = self.comboBoxDevs.currentData()
         dev2 = self.comboBoxDevs_2.currentData() if self.comboBoxDevs_2.currentIndex() >= 0 else None
@@ -144,13 +144,13 @@ class NewTitleDialog(QtWidgets.QDialog, Ui_NewTitleDialog):
             return
         
         if (self.lineEditTitle.text() == None) or \
-            (self.comboBoxDevs.currentIndex == -1) or \
-            (self.comboBoxPlatforms.currentIndex == -1) or \
+            (self.comboBoxDevs.currentIndex() == -1) or \
+            (self.comboBoxPlatforms.currentIndex() == -1) or \
             (not((self.dateEditRel.date().toString('yyyy-MM-dd') != '2000-01-01') or (self.checkBoxRel.isChecked()))) or \
             (not((self.radioButtonOG.isChecked() or self.radioButtonOH.isChecked() or self.radioButtonC.isChecked() or self.radioButtonA.isChecked())) or \
             (self.lineEditSRC.text() == None) or \
             (self.lineEditLink.text() == None)):
-            print('Fill All Fields')
+            # print('Fill All Fields')
             dlg = QtWidgets.QMessageBox(self)
             dlg.setWindowTitle('Adding Title')
             dlg.setText("Fill in all the fields.")

@@ -13,7 +13,7 @@ def GetCountTitleStatus(dblocation):
         '''
         cursor.execute(query)
         stat = cursor.fetchall()
-        print(stat)
+        # print(stat)
         return stat
     
 def GetCountTitles(dblocation):
@@ -26,7 +26,7 @@ def GetCountTitles(dblocation):
         '''
         cursor.execute(query)
         stat = cursor.fetchall()
-        print(stat)
+        # print(stat)
         return stat
     
 def GetCountUpdates(dblocation):
@@ -39,7 +39,7 @@ def GetCountUpdates(dblocation):
         '''
         cursor.execute(query)
         stat = cursor.fetchall()
-        print(stat)
+        # print(stat)
         return stat
     
 def GetCountUpdateStatus(dblocation):
@@ -55,7 +55,7 @@ def GetCountUpdateStatus(dblocation):
         '''
         cursor.execute(query)
         stat = cursor.fetchall()
-        print(stat)
+        # print(stat)
         return stat
     
 def GetCountTitleAvail(dblocation):
@@ -71,7 +71,7 @@ def GetCountTitleAvail(dblocation):
         '''
         cursor.execute(query)
         stat = cursor.fetchall()
-        print(stat)
+        # print(stat)
         return stat
     
 def GetCountUpdatePlay(dblocation):
@@ -87,5 +87,5 @@ def GetCountUpdatePlay(dblocation):
         '''
         cursor.execute(query)
         stat = cursor.fetchall()
-        print(stat)
+        # print(stat)
         return stat

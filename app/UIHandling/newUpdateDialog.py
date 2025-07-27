@@ -62,7 +62,7 @@ class NewUpdateDialog(QtWidgets.QDialog, Ui_NewUpdateDialog):
             (not((self.dateEditRel.date().toString('yyyy-MM-dd') != '2000-01-01') or (self.checkBoxRel.isChecked()))) or \
             (not(self.radioButtonP_NP.isChecked() or self.radioButtonP_P.isChecked() or self.radioButtonP_PD.isChecked())) or \
             (not(self.radioButtonU_A.isChecked() or self.radioButtonU_DS.isChecked() or self.radioButtonU_NA.isChecked() or self.radioButtonU_TD.isChecked())):
-                print('Fill All Fields')
+                # print('Fill All Fields')
                 dlg = QtWidgets.QMessageBox(self)
                 dlg.setWindowTitle('Adding Title')
                 dlg.setText("Fill in all the fields.")
@@ -77,7 +77,7 @@ class NewUpdateDialog(QtWidgets.QDialog, Ui_NewUpdateDialog):
         self.data['id'] = self.lineEditID.text()
         self.data['name'] = self.lineEditName.text()
         self.data['comment'] = self.plainTextEditComment.toPlainText()
-        print(self.data)
+        # print(self.data)
         result = app.AddUpdates(DB, self.data)
         
         dlg = QtWidgets.QMessageBox(self)

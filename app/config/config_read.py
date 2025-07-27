@@ -6,7 +6,8 @@ from PyQt6 import QtWidgets
 # CONFIG_FILE = "../../data/config.ini"
 
 def ConfigRead():
-    print("test read")
+    # print("test read")
+    pass
 
 def ReadConfigTheme(CONFIG_FILE):
     config = configparser.ConfigParser()
@@ -18,4 +19,4 @@ def main():
     
 if __name__ == "__main__":
     main()
-    print(ReadConfigTheme())
+    # print(ReadConfigTheme())

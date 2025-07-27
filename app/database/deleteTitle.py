@@ -13,11 +13,11 @@ def DeleteTitle(dblocation, id):
             ;'''
             # data = (f"'{id}'")
             data = (id,)
-            print(data)
+            # print(data)
             cursor.execute(query, data)
             connection.commit()
             return { 'success': True }
         except sqlite3.Error as e:
-            print(e)
+            # print(e)
             return { 'success': False }
         

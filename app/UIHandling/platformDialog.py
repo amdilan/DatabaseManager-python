@@ -38,16 +38,16 @@ class PlatformDialog(QtWidgets.QDialog, Ui_PlatformDialog):
         selectedItem = self.listWidgetPlat.selectedItems()
         if not selectedItem:
             return
-        print(selectedItem)
+        # print(selectedItem)
         self.pushButtonEdit.setDisabled(False)
         self.pushButtonDelete.setDisabled(False)
         
         item = selectedItem[0]
-        print(item)
+        # print(item)
         row = self.listWidgetPlat.row(item)
         self.selectedData = self.listWidgetPlat.item(row).data(Qt.ItemDataRole.UserRole)
         
-        print(f"Selected ID: {self.selectedData[0]}")
+        # print(f"Selected ID: {self.selectedData[0]}")
         
     def ClearSelection(self):
         self.listWidgetPlat.clearSelection()
@@ -105,8 +105,8 @@ class PlatformDialog(QtWidgets.QDialog, Ui_PlatformDialog):
             return
         
         id = self.selectedData[0]
-        print(f"id : {id}")
-        print(f"id : {self.selectedData}")
+        # print(f"id : {id}")
+        # print(f"id : {self.selectedData}")
         result = app.DeletePlats(DB, id)
         if result['success']:
             self.HandleNew()

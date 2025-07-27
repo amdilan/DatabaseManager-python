@@ -7,7 +7,7 @@ def GetDevs(dblocation):
         query = 'SELECT * FROM developers;'
         cursor.execute(query)
         devs = cursor.fetchall()
-        print(devs)
+        # print(devs)
         return devs
     
 def GetDevsOrdered(dblocation):
@@ -17,5 +17,5 @@ def GetDevsOrdered(dblocation):
         query = 'SELECT * FROM developers ORDER BY developer ASC;'
         cursor.execute(query)
         devs = cursor.fetchall()
-        print(devs)
+        # print(devs)
         return devs

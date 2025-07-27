@@ -68,7 +68,7 @@ class EditUpdateDialog(QtWidgets.QDialog, Ui_EditUpdateDialog):
     def PopulateFields(self):
         update = app.GetUpdatesId(DB, str(self.data0))
         data = update[0]
-        print(update)
+        # print(update)
         self.lineEditUID.setText(str(data[0]))
         self.lineEditID.setText(str(data[1]))
         self.selectTitle(data) # title
@@ -94,7 +94,7 @@ class EditUpdateDialog(QtWidgets.QDialog, Ui_EditUpdateDialog):
             (not((self.dateEditRel.date().toString('yyyy-MM-dd') != '2000-01-01') or (self.checkBoxRel.isChecked()))) or \
             (not(self.radioButtonP_NP.isChecked() or self.radioButtonP_P.isChecked() or self.radioButtonP_PD.isChecked())) or \
             (not(self.radioButtonU_A.isChecked() or self.radioButtonU_DS.isChecked() or self.radioButtonU_NA.isChecked() or self.radioButtonU_TD.isChecked())):
-                print('Fill All Fields')
+                # print('Fill All Fields')
                 dlg = QtWidgets.QMessageBox(self)
                 dlg.setWindowTitle('Adding Title')
                 dlg.setText("Fill in all the fields.")
@@ -113,7 +113,7 @@ class EditUpdateDialog(QtWidgets.QDialog, Ui_EditUpdateDialog):
         self.HandleRel()
         self.SelectRadioStatusPlaying()
         self.SelectRadioStatusUpdate()
-        print(self.data)
+        # print(self.data)
         result = app.UpdateUpdate(DB, self.data)
         
         dlg = QtWidgets.QMessageBox(self)

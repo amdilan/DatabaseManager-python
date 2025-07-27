@@ -12,6 +12,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         
         self.PopulateStats()
+        self.PopulateTitles()
+        self.PopulateUpdates()
         
         self.tabWidget.currentChanged.connect(self.on_tab_changed)
         self.actionTheme.triggered.connect(self.ChangeTheme)
@@ -56,19 +58,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.PopulateUpdates()
                 
     def HandleNewTitleClick(self):
-        print("...")
+        # print("...")
         dlg = app.NewTitleDialog()
         dlg.exec()
         self.PopulateTitles()
         
     def HandleNewUpdateClick(self):
-        print(".....")
+        # print(".....")
         dlg = app.NewUpdateDialog()
         dlg.exec()
         self.PopulateUpdates()
     
     def HandleNewThemeChanged(self):
-        print(".")
+        # print(".")
         pass
     
     def CheckDarkTheme(self, CONFIG_FILE):
@@ -150,7 +152,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def PopulateTitles(self):
         self.tableWidgetTitles.clear()
         titles = app.GetTitleDetails(DB)
-        print(titles)
+        # print(titles)
         self.tableWidgetTitles.setColumnCount(10)
         self.tableWidgetTitles.setHorizontalHeaderLabels(["T. ID", "Name", "Devs", "Released", "Status", "Platform", "Web Link", "Availability", "Comment", ""])
         
@@ -242,7 +244,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def PopulateUpdates(self):
         self.tableWidgetUpdate.clear()
         titles = app.GetUpdateDetails(DB)
-        print(titles)
+        # print(titles)
         self.tableWidgetUpdate.setColumnCount(9)
         self.tableWidgetUpdate.setHorizontalHeaderLabels(["U. ID", "T. ID", "Title", "Version", "Released", "Update Status", "Play Status", "Comment", ""])
         
@@ -307,7 +309,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.tableWidgetUpdate.resizeRowsToContents()
         
     def edit_title(self, row):
-        print(f"Editing row {row}")
+        # print(f"Editing row {row}")
         item = self.tableWidgetTitles.item(row, 0)
         if item:
             row_data = item.data(Qt.ItemDataRole.UserRole)
@@ -317,7 +319,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     
     def delete_title(self, row):
         # Implement your delete functionality here
-        print(f"Deleting row {row}")
+        # print(f"Deleting row {row}")
         # Example confirmation dialog:
         reply = QtWidgets.QMessageBox.question(
             self, 'Delete Title', 
@@ -345,7 +347,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 dlg.exec()
         
     def edit_update(self, row):
-        print(f"Editing row {row}")
+        # print(f"Editing row {row}")
         item = self.tableWidgetUpdate.item(row, 0)
         if item:
             row_data = item.data(Qt.ItemDataRole.UserRole)
@@ -355,7 +357,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     
     def delete_update(self, row):
         # Implement your delete functionality here
-        print(f"Deleting row {row}")
+        # print(f"Deleting row {row}")
         # Example confirmation dialog:
         reply = QtWidgets.QMessageBox.question(
             self, 'Delete Update', 

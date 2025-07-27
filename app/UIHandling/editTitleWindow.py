@@ -43,7 +43,7 @@ class EditTitleDialog(QtWidgets.QDialog, Ui_EditTitleDialog):
         devs = app.GetDevsOrdered(DB)
         self.comboBoxDevs.clear()
         self.comboBoxDevs.setPlaceholderText(' ')
-        print(devs)
+        # print(devs)
         for row in devs:
             dev_row = None            
             if row[2]:
@@ -70,9 +70,9 @@ class EditTitleDialog(QtWidgets.QDialog, Ui_EditTitleDialog):
             self.comboBoxPlatforms.addItem(row[1], row)
             
     def PopulateFields(self):
-        print(f"EDIT Data: {self.data0}")
+        # print(f"EDIT Data: {self.data0}")
         title = app.GetTitlesId(DB, str(self.data0))
-        print(title)
+        # print(title)
         data = title[0]
         self.lineEditID.setText(str(data[0]))
         self.lineEditTitle.setText(data[1])
@@ -130,15 +130,15 @@ class EditTitleDialog(QtWidgets.QDialog, Ui_EditTitleDialog):
         if (self.radioButtonA.isChecked()): self.status = 3
         
     def Validate(self):
-        print( self.dateEditRel.date().toPyDate(),not((self.dateEditRel.date().toString('yyyy-MM-dd') != '2000-01-01') or (self.checkBoxRel.isChecked())))
-        print(f"Title: {self.lineEditTitle.text()}")
-        print(f"Dev: {self.comboBoxDevs.currentIndex()}")
-        print(f"Plat: {self.comboBoxPlatforms.currentIndex()}")
-        print(f"Rel: {self.dateEditRel.date().toString('yyyy-MM-dd')} N/A: {self.checkBoxRel.isChecked()}")
-        print(f"Status: {self.plainTextEditComment.toPlainText()}")
-        print(f"Source: {self.lineEditSRC.text()}")
-        print(f"Link: {self.lineEditLink.text()}")
-        print(f"comment: {self.plainTextEditComment.toPlainText()}")
+        # print( self.dateEditRel.date().toPyDate(),not((self.dateEditRel.date().toString('yyyy-MM-dd') != '2000-01-01') or (self.checkBoxRel.isChecked())))
+        # print(f"Title: {self.lineEditTitle.text()}")
+        # print(f"Dev: {self.comboBoxDevs.currentIndex()}")
+        # print(f"Plat: {self.comboBoxPlatforms.currentIndex()}")
+        # print(f"Rel: {self.dateEditRel.date().toString('yyyy-MM-dd')} N/A: {self.checkBoxRel.isChecked()}")
+        # print(f"Status: {self.plainTextEditComment.toPlainText()}")
+        # print(f"Source: {self.lineEditSRC.text()}")
+        # print(f"Link: {self.lineEditLink.text()}")
+        # print(f"comment: {self.plainTextEditComment.toPlainText()}")
         
         if (self.lineEditTitle.text() == None) or \
             (self.comboBoxDevs.currentIndex == -1) or \
@@ -147,7 +147,7 @@ class EditTitleDialog(QtWidgets.QDialog, Ui_EditTitleDialog):
             (not((self.radioButtonOG.isChecked() or self.radioButtonOH.isChecked() or self.radioButtonC.isChecked() or self.radioButtonA.isChecked())) or \
             (self.lineEditSRC.text() == None) or \
             (self.lineEditLink.text() == None)):
-            print('Fill All Fields')
+            # print('Fill All Fields')
             dlg = QtWidgets.QMessageBox(self)
             dlg.setWindowTitle('Adding Title')
             dlg.setText("Fill in all the fields.")
@@ -161,7 +161,7 @@ class EditTitleDialog(QtWidgets.QDialog, Ui_EditTitleDialog):
     def HandleSubmit(self):
         self.HandleRel()
         self.SelectRadio()
-        print('Submitted')
+        # print('Submitted')
         self.data['id'] = self.lineEditID.text()
         self.data['title'] = self.lineEditTitle.text()
         self.data['dev'] = self.comboBoxDevs.itemData(self.comboBoxDevs.currentIndex())[0]
@@ -174,7 +174,7 @@ class EditTitleDialog(QtWidgets.QDialog, Ui_EditTitleDialog):
         self.data['link'] = self.lineEditLink.text()
         self.data['status'] = self.status
         self.data['comment'] = self.plainTextEditComment.toPlainText()
-        print(self.data)
+        # print(self.data)
         result = app.UpdateTitle(DB, self.data)
         
         dlg = QtWidgets.QMessageBox(self)

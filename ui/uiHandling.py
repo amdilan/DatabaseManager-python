@@ -20,17 +20,17 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.actionDevelopers.triggered.connect(self.HandleMenuDevs)
                 
     def HandleNewTitleClick(self):
-        print("...")
+        # print("...")
         dlg = NewTitleDialog()
         dlg.exec()
         
     def HandleNewUpdateClick(self):
-        print(".....")
+        # print(".....")
         dlg = NewUpdateDialog()
         dlg.exec()
     
     def HandleNewThemeChanged(self):
-        print(".")
+        # print(".")
         pass
     
     def CheckDarkTheme(self, CONFIG_FILE):
@@ -91,7 +91,7 @@ class NewTitleDialog(QtWidgets.QDialog, Ui_NewTitleDialog):
     def PopulateDevs(self):
         self.comboBoxDevs.clear()
         devs = app.GetDevs(DB)
-        print(devs)
+        # print(devs)
         for row in devs:
             self.comboBoxDevs.addItem(row[1], row[0])
             
@@ -108,7 +108,7 @@ class NewTitleDialog(QtWidgets.QDialog, Ui_NewTitleDialog):
         if (self.radioButtonA.isChecked()): pass
                     
     def HandleSubmit(self):
-        print('Submitted')
+        # print('Submitted')
         self.data['title'] = self.lineEditTitle.text()
         self.data['dev'] = self.comboBoxDevs.itemData(self.comboBoxDevs.currentIndex())
         self.data['dev2'] = ''
@@ -119,14 +119,14 @@ class NewTitleDialog(QtWidgets.QDialog, Ui_NewTitleDialog):
         # self.data['avail'] = self.
         self.data['status'] = self.status
         self.data['comment'] = self.plainTextEditComment.toPlainText()
-        print(self.dateEditRel.date().toPyDate())
-        print(self.data)
+        # print(self.dateEditRel.date().toPyDate())
+        # print(self.data)
         
     def Validate(self):
         if (self.lineEditTitle.text() == '') or (self.comboBoxDevs.currentIndex == -1) or (self.comboBoxPlatforms.currentIndex == -1) or (not((self.dateEditRel.date().toString('yyyy-MM-dd') != '2000-01-01') or (self.checkBoxRel.isChecked()))) or ((self.radioButtonOG.isChecked() or self.radioButtonOH.isChecked() or self.radioButtonC.isChecked() or self.radioButtonA.isChecked()) or (self.lineEditSRC.text() == '') or (self.lineEditLink.text() == '')):
-            print( self.dateEditRel.date().toPyDate(),not((self.dateEditRel.date().toString('yyyy-MM-dd') != '2000-01-01') or (self.checkBoxRel.isChecked())))
-            print(f"comment: {self.plainTextEditComment.toPlainText()}")
-            print('Fill All Fields')
+            # print( self.dateEditRel.date().toPyDate(),not((self.dateEditRel.date().toString('yyyy-MM-dd') != '2000-01-01') or (self.checkBoxRel.isChecked())))
+            # print(f"comment: {self.plainTextEditComment.toPlainText()}")
+            # print('Fill All Fields')
             return
         
         self.HandleSubmit()
@@ -173,16 +173,16 @@ class PlatformDialog(QtWidgets.QDialog, Ui_PlatformDialog):
         selectedItem = self.listWidgetPlat.selectedItems()
         if not selectedItem:
             return
-        print(selectedItem)
+        # print(selectedItem)
         self.pushButtonEdit.setDisabled(False)
         self.pushButtonDelete.setDisabled(False)
         
         item = selectedItem[0]
-        print(item)
+        # print(item)
         row = self.listWidgetPlat.row(item)
         self.selectedData = self.listWidgetPlat.item(row).data(Qt.ItemDataRole.UserRole)
         
-        print(f"Selected ID: {self.selectedData[0]}")
+        # print(f"Selected ID: {self.selectedData[0]}")
         
     def ClearSelection(self):
         self.listWidgetPlat.clearSelection()
@@ -240,8 +240,8 @@ class PlatformDialog(QtWidgets.QDialog, Ui_PlatformDialog):
             return
         
         id = self.selectedData[0]
-        print(f"id : {id}")
-        print(f"id : {self.selectedData}")
+        # print(f"id : {id}")
+        # print(f"id : {self.selectedData}")
         result = app.DeletePlats(DB, id)
         if result['success']:
             self.HandleNew()
@@ -312,7 +312,7 @@ class DevDialog(QtWidgets.QDialog, Ui_DevDialog):
         selectedItem = self.tableWidgetDevs.selectedItems()
         if not selectedItem:
             return
-        print(selectedItem)
+        # print(selectedItem)
         self.pushButtonEdit.setDisabled(False)
         self.pushButtonDelete.setDisabled(False)
         
@@ -320,7 +320,7 @@ class DevDialog(QtWidgets.QDialog, Ui_DevDialog):
         row = item.row()
         self.selectedData = self.tableWidgetDevs.item(row, 0).data(Qt.ItemDataRole.UserRole)
         
-        print(f"Selected ID: {self.selectedData[0]}")
+        # print(f"Selected ID: {self.selectedData[0]}")
         
     def ClearSelection(self):
         self.tableWidgetDevs.clearSelection()
@@ -393,8 +393,8 @@ class DevDialog(QtWidgets.QDialog, Ui_DevDialog):
             return        
         
         id = self.selectedData[0]
-        print(f"id : {id}")
-        print(f"id : {self.selectedData}")
+        # print(f"id : {id}")
+        # print(f"id : {self.selectedData}")
         result = app.DeleteDevs(DB, id)
         if result['success']:
             self.label.setText('Delete Successfully!')

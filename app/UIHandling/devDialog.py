@@ -66,7 +66,7 @@ class DevDialog(QtWidgets.QDialog, Ui_DevDialog):
         selectedItem = self.tableWidgetDevs.selectedItems()
         if not selectedItem:
             return
-        print(selectedItem)
+        # print(selectedItem)
         self.pushButtonEdit.setDisabled(False)
         self.pushButtonDelete.setDisabled(False)
         
@@ -74,7 +74,7 @@ class DevDialog(QtWidgets.QDialog, Ui_DevDialog):
         row = item.row()
         self.selectedData = self.tableWidgetDevs.item(row, 0).data(Qt.ItemDataRole.UserRole)
         
-        print(f"Selected ID: {self.selectedData[0]}")
+        # print(f"Selected ID: {self.selectedData[0]}")
         
     def ClearSelection(self):
         self.tableWidgetDevs.clearSelection()
@@ -147,8 +147,8 @@ class DevDialog(QtWidgets.QDialog, Ui_DevDialog):
             return        
         
         id = self.selectedData[0]
-        print(f"id : {id}")
-        print(f"id : {self.selectedData}")
+        # print(f"id : {id}")
+        # print(f"id : {self.selectedData}")
         result = app.DeleteDevs(DB, id)
         if result['success']:
             self.label.setText('Delete Successfully!')

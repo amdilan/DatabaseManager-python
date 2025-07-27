@@ -26,6 +26,6 @@ def UpdateUpdate(dblocation, data):
             connection.commit()
             return { 'success': True }
         except sqlite3.Error as e:
-            print(e)
+            # print(e)
             return { 'success': False }
         
