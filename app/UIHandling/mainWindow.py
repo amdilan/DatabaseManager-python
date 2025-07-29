@@ -1,4 +1,4 @@
-from PyQt6 import QtWidgets
+from PyQt6 import QtWidgets, QtCore, QtGui
 from PyQt6.QtCore import Qt, QUrl, QTimer
 from PyQt6.QtGui import QDesktopServices, QColor, QBrush
 
@@ -10,6 +10,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self, *args, obj=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.setupUi(self)
+        
+        self.proxy_modelTitles = QtCore.QSortFilterProxyModel()
+        self.proxy_modelTitles.setFilterCaseSensitivity(QtCore.Qt.CaseSensitivity.CaseInsensitive)
+        self.proxy_modelTitles.setFilterKeyColumn(-1)
+        self.proxy_modelUpdates = QtCore.QSortFilterProxyModel()
+        self.proxy_modelUpdates.setFilterCaseSensitivity(QtCore.Qt.CaseSensitivity.CaseInsensitive)
+        self.proxy_modelUpdates.setFilterKeyColumn(-1)
         
         self.PopulateStats()
         self.PopulateTitles()
@@ -41,6 +48,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.search_timerUpdate.setSingleShot(True)
         self.search_timerUpdate.timeout.connect(self.filterTableUpdate)
         
+    def __del__(self):
+        self.search_timer.stop()
+        self.search_timerUpdate.stop()
+        del self.proxy_modelTitles
+        del self.proxy_modelUpdates
+                
     def start_search_time_Title(self):
         self.search_timer.start(300)  # 300ms delay before searching
         
@@ -150,177 +163,110 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         lcdUTPD.display(tp[2][1])
                 
     def PopulateTitles(self):
-        self.tableWidgetTitles.clear()
         titles = app.GetTitleDetails(DB)
-        # print(titles)
-        self.tableWidgetTitles.setColumnCount(10)
-        self.tableWidgetTitles.setHorizontalHeaderLabels(["T. ID", "Name", "Devs", "Released", "Status", "Platform", "Web Link", "Availability", "Comment", ""])
-        
-        try:
-            self.tableWidgetTitles.cellClicked.disconnect()
-        except:
-            pass
-        
-        self.tableWidgetTitles.setRowCount(len(titles))
-        for row_idx, row in enumerate(titles):
-            item_id = QtWidgets.QTableWidgetItem(str(row[0]))
-            item_name = QtWidgets.QTableWidgetItem(row[1])
-            item_rel = QtWidgets.QTableWidgetItem(row[4])
-            item_status = QtWidgets.QTableWidgetItem(row[5])
-            item_plat = QtWidgets.QTableWidgetItem(row[6])
-            item_link_text = QtWidgets.QTableWidgetItem(row[7])
-            item_link_src = row[8]
-            item_avail = QtWidgets.QTableWidgetItem(row[9])
-            item_comment = QtWidgets.QTableWidgetItem(row[10])
 
-            item_link = None
-            if not(item_link_src == "" or item_link_src == None):
-                item_link = self.create_link_item(item_link_src, item_link_text)
-            
-            item_devs = None
-            dev_names = []
-            if row[2]:
-                if row[11]:
-                    dev_name = f"{row[2]} [aka] {row[11]}"
-                    dev_names.append(dev_name)
-                else:
-                    dev_names.append(row[2])
-            if row[3]:
-                if row[12]:
-                    dev_name = f"{row[3]} [aka] {row[12]}"
-                    dev_names.append(dev_name)
-                else:
-                    dev_names.append(row[3])
-            dev_text = "\n".join(dev_names)
-            item_devs = QtWidgets.QTableWidgetItem(dev_text)
-            # item_devs.setTextAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)  
-            item_devs.setTextAlignment(Qt.AlignmentFlag.AlignLeft)  
-            self.tableWidgetTitles.setStyleSheet("""
-                    QTableWidget {
-                        gridline-color: #ccc;
-                    }
-                    QTableWidget::item {
-                        padding: 3px;
-                    }
-                """)
-            
-            self.tableWidgetTitles.setWordWrap(True)
-            item_id.setData(Qt.ItemDataRole.UserRole, row)
-            
-            self.tableWidgetTitles.setItem(row_idx, 0, item_id)
-            self.tableWidgetTitles.setItem(row_idx, 1, item_name)
-            self.tableWidgetTitles.setItem(row_idx, 2, item_devs)
-            self.tableWidgetTitles.setItem(row_idx, 3, item_rel)
-            self.tableWidgetTitles.setItem(row_idx, 4, item_status)
-            self.tableWidgetTitles.setItem(row_idx, 5, item_plat)
-            self.tableWidgetTitles.setItem(row_idx, 6, item_link)
-            self.tableWidgetTitles.setItem(row_idx, 7, item_avail)
-            self.tableWidgetTitles.setItem(row_idx, 8, item_comment)
-            
-            # Create a tool button with menu for actions column
+        self.modelTitles = TitlesTableModel(titles)
+        self.proxy_modelTitles.setSourceModel(self.modelTitles)
+        self.tableTitles.setModel(self.proxy_modelTitles)
+        self.tableTitles.setWordWrap(True)
+        self.tableTitles.verticalHeader().setDefaultAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
+        
+        self.tableTitles.setStyleSheet("""
+            QTableView {
+                gridline-color: #ccc;
+            }
+            QTableView::item {
+                padding: 3px;
+            }
+        """)
+
+        self.tableTitles.setSortingEnabled(False)
+        # Add tool buttons for the last column
+        for row in range(self.modelTitles.rowCount()):
             tool_button = QtWidgets.QToolButton()
-            tool_button.setText("⋮")  # Vertical ellipsis character
+            tool_button.setText("⋮")
             tool_button.setStyleSheet("QToolButton::menu-indicator { image: none; }")
-
-            # Create menu
             menu = QtWidgets.QMenu()
             edit_action = menu.addAction("Edit")
             delete_action = menu.addAction("Delete")
-            
-            # Connect actions to slots
-            edit_action.triggered.connect(lambda _, r=row_idx: self.edit_title(r))
-            delete_action.triggered.connect(lambda _, r=row_idx: self.delete_title(r))
-            
+            edit_action.triggered.connect(lambda _, r=row: self.edit_title(r))
+            delete_action.triggered.connect(lambda _, r=row: self.delete_title(r))
             tool_button.setMenu(menu)
             tool_button.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.InstantPopup)
-        
-            # Add the button to the table
-            self.tableWidgetTitles.setCellWidget(row_idx, 9, tool_button)
-            
-        self.tableWidgetTitles.cellClicked.connect(self.open_link)
-        self.tableWidgetTitles.resizeColumnsToContents()
-        self.tableWidgetTitles.resizeRowsToContents()
+            tool_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+            self.tableTitles.setIndexWidget(
+                self.proxy_modelTitles.index(row, self.modelTitles.columnCount()-1),
+                tool_button
+            )
+
+        self.tableTitles.setSortingEnabled(True)
+        self.tableTitles.sortByColumn(0, QtCore.Qt.SortOrder.AscendingOrder)
+        self.tableTitles.setItemDelegateForColumn(6, HyperlinkDelegate(self.tableTitles))
+        self.tableTitles.viewport().setMouseTracking(True)
+        self.tableTitles.viewport().installEventFilter(self)
+        self.tableTitles.resizeColumnsToContents()
+        self.tableTitles.resizeRowsToContents()
+        # self.tableTitles.clicked.connect(self.open_link)
         
     def PopulateUpdates(self):
-        self.tableWidgetUpdate.clear()
-        titles = app.GetUpdateDetails(DB)
-        # print(titles)
-        self.tableWidgetUpdate.setColumnCount(9)
-        self.tableWidgetUpdate.setHorizontalHeaderLabels(["U. ID", "T. ID", "Title", "Version", "Released", "Update Status", "Play Status", "Comment", ""])
+        update = app.GetUpdateDetails(DB)
         
-        try:
-            self.tableWidgetUpdate.cellClicked.disconnect()
-        except:
-            pass
+        self.modelUpdates = UpdatesTableModel(update)
+        self.proxy_modelUpdates.setSourceModel(self.modelUpdates)
+        self.tableUpdates.setModel(self.proxy_modelUpdates)
+        self.tableUpdates.setWordWrap(True)
+        self.tableUpdates.verticalHeader().setDefaultAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
         
-        self.tableWidgetUpdate.setRowCount(len(titles))
-        for row_idx, row in enumerate(titles):
-            item_id = QtWidgets.QTableWidgetItem(str(row[0]))
-            item_Tid = QtWidgets.QTableWidgetItem(str(row[1]))
-            item_title = QtWidgets.QTableWidgetItem(row[2])
-            item_update = QtWidgets.QTableWidgetItem(row[3])
-            item_rel = QtWidgets.QTableWidgetItem(row[4])
-            item_US = QtWidgets.QTableWidgetItem(row[5])
-            item_PS = QtWidgets.QTableWidgetItem(row[6])
-            item_comment = QtWidgets.QTableWidgetItem(row[7])
-            self.tableWidgetUpdate.setStyleSheet("""
-                    QTableWidget {
-                        gridline-color: #ccc;
-                    }
-                    QTableWidget::item {
-                        padding: 3px;
-                    }
-                """)
-            
-            self.tableWidgetUpdate.setWordWrap(True)
-            item_id.setData(Qt.ItemDataRole.UserRole, row)
-            
-            self.tableWidgetUpdate.setItem(row_idx, 0, item_id)
-            self.tableWidgetUpdate.setItem(row_idx, 1, item_Tid)
-            self.tableWidgetUpdate.setItem(row_idx, 2, item_title)
-            self.tableWidgetUpdate.setItem(row_idx, 3, item_update)
-            self.tableWidgetUpdate.setItem(row_idx, 4, item_rel)
-            self.tableWidgetUpdate.setItem(row_idx, 5, item_US)
-            self.tableWidgetUpdate.setItem(row_idx, 6, item_PS)
-            self.tableWidgetUpdate.setItem(row_idx, 7, item_comment)
-            
-            # Create a tool button with menu for actions column
+        self.tableUpdates.setStyleSheet("""
+            QTableView {
+                gridline-color: #ccc;
+            }
+            QTableView::item {
+                padding: 3px;
+            }
+        """)
+        
+        self.tableTitles.setSortingEnabled(False)
+        # Add tool buttons for the last column
+        for row in range(self.modelUpdates.rowCount()):
             tool_button = QtWidgets.QToolButton()
-            tool_button.setText("⋮")  # Vertical ellipsis character
+            tool_button.setText("⋮")
             tool_button.setStyleSheet("QToolButton::menu-indicator { image: none; }")
-
-            # Create menu
             menu = QtWidgets.QMenu()
             edit_action = menu.addAction("Edit")
             delete_action = menu.addAction("Delete")
-            
-            # Connect actions to slots
-            edit_action.triggered.connect(lambda _, r=row_idx: self.edit_update(r))
-            delete_action.triggered.connect(lambda _, r=row_idx: self.delete_update(r))
-            
+            edit_action.triggered.connect(lambda _, r=row: self.edit_update(r))
+            delete_action.triggered.connect(lambda _, r=row: self.delete_update(r))
             tool_button.setMenu(menu)
             tool_button.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.InstantPopup)
-        
-            # Add the button to the table
-            self.tableWidgetUpdate.setCellWidget(row_idx, 8, tool_button)
+            tool_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+            self.tableUpdates.setIndexWidget(
+                self.proxy_modelUpdates.index(row, self.modelUpdates.columnCount()-1),
+                tool_button
+            )
             
-        self.tableWidgetUpdate.cellClicked.connect(self.open_link)
-        self.tableWidgetUpdate.resizeColumnsToContents()
-        self.tableWidgetUpdate.resizeRowsToContents()
+        self.tableUpdates.setSortingEnabled(True)
+        self.tableUpdates.sortByColumn(0, QtCore.Qt.SortOrder.AscendingOrder)
+        self.tableUpdates.resizeColumnsToContents()
+        self.tableUpdates.resizeRowsToContents()
         
     def edit_title(self, row):
         # print(f"Editing row {row}")
-        item = self.tableWidgetTitles.item(row, 0)
-        if item:
-            row_data = item.data(Qt.ItemDataRole.UserRole)
-        dlg = app.EditTitleDialog(data=row_data[0])
+        if row < 0 or row >= self.modelTitles.rowCount():
+            return
+        index = self.modelTitles.index(row, 0)
+        row_data = index.data(QtCore.Qt.ItemDataRole.UserRole)
+        if not row_data:
+            return
+        dlg = app.EditTitleDialog(data=row_data)
         dlg.exec()
         self.PopulateTitles()
     
     def delete_title(self, row):
-        # Implement your delete functionality here
         # print(f"Deleting row {row}")
-        # Example confirmation dialog:
+        if row < 0 or row >= self.modelTitles.rowCount():
+            return
+        index = self.modelTitles.index(row, 0)
         reply = QtWidgets.QMessageBox.question(
             self, 'Delete Title', 
             'Are you sure you want to delete this title?',
@@ -328,10 +274,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         )
         if reply == QtWidgets.QMessageBox.StandardButton.Yes:
             # Delete logic here
-            item = self.tableWidgetTitles.item(row, 0)
-            if item:
-                row_data = item.data(Qt.ItemDataRole.UserRole)
-            result = app.DeleteTitle(DB, row_data[0])
+            row_data = index.data(QtCore.Qt.ItemDataRole.UserRole)
+            if not row_data:
+                return
+            result = app.DeleteTitle(DB, row_data)
             dlg = QtWidgets.QMessageBox(self)
             dlg.setWindowTitle('Deleting Title')
             if (result['success']):
@@ -348,17 +294,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
     def edit_update(self, row):
         # print(f"Editing row {row}")
-        item = self.tableWidgetUpdate.item(row, 0)
-        if item:
-            row_data = item.data(Qt.ItemDataRole.UserRole)
+        if row < 0 or row >= self.modelUpdates.rowCount():
+            return
+        index = self.modelUpdates.index(row, 0)
+        row_data = index.data(QtCore.Qt.ItemDataRole.UserRole)
+        if not row_data:
+            return
         dlg = app.EditUpdateDialog(data=row_data[0])
         dlg.exec()
         self.PopulateUpdates()
     
     def delete_update(self, row):
-        # Implement your delete functionality here
         # print(f"Deleting row {row}")
-        # Example confirmation dialog:
+        if row < 0 or row >= self.modelUpdates.rowCount():
+            return
+        index = self.modelUpdates.index(row, 0)
         reply = QtWidgets.QMessageBox.question(
             self, 'Delete Update', 
             'Are you sure you want to delete this update?',
@@ -366,9 +316,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         )
         if reply == QtWidgets.QMessageBox.StandardButton.Yes:
             # Delete logic here
-            item = self.tableWidgetUpdate.item(row, 0)
-            if item:
-                row_data = item.data(Qt.ItemDataRole.UserRole)
+            row_data = index.data(QtCore.Qt.ItemDataRole.UserRole)
+            if not row_data:
+                return
             result = app.DeleteUpdate(DB, row_data[0])
             dlg = QtWidgets.QMessageBox(self)
             dlg.setWindowTitle('Deleting Update')
@@ -398,68 +348,237 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 QDesktopServices.openUrl(QUrl(url))
                 
     def filterTableTitle(self):
-        search_text = self.lineEditSearchTitle.text().strip().lower()
-        
-        for row in range(self.tableWidgetTitles.rowCount()):
-            row_found = False
-            if not search_text:
-                self.tableWidgetTitles.setRowHidden(row, False)
-                for col in range(self.tableWidgetTitles.columnCount()):
-                    item = self.tableWidgetTitles.item(row, col)
-                    if item:
-                        item.setBackground(QBrush())  # Reset to default
-                        item.setForeground(QBrush())
-                        if col == 6:
-                            item.setForeground(QBrush(QColor('blue')))
-                continue
-            
-            for col in range(self.tableWidgetTitles.columnCount()):
-                item = self.tableWidgetTitles.item(row, col)
-                
-                if col == 6:
-                            item.setForeground(QBrush(QColor('blue')))
-                
-                if col == 9:
-                    continue
-                
-                if item and search_text in item.text().lower():
-                    row_found = True
-                    item.setBackground(QBrush(QColor(255, 255, 0)))
-                    item.setForeground(QBrush(QColor('black')))
-                    break
-                else:
-                    item.setForeground(QBrush())
-                    item.setBackground(QBrush())
-                    pass
-            self.tableWidgetTitles.setRowHidden(row, not row_found)
+        search_text = self.lineEditSearchTitle.text().strip()
+        self.proxy_modelTitles.setFilterFixedString(search_text)
             
     def filterTableUpdate(self):
-        search_text = self.lineEditSearchUpdate.text().strip().lower()
-        
-        for row in range(self.tableWidgetUpdate.rowCount()):
-            row_found = False
-            if not search_text:
-                self.tableWidgetUpdate.setRowHidden(row, False)
-                for col in range(self.tableWidgetUpdate.columnCount()):
-                    item = self.tableWidgetUpdate.item(row, col)
-                    if item:
-                        item.setBackground(QBrush())  # Reset to default
-                        item.setForeground(QBrush())                        
-                continue
-            
-            for col in range(self.tableWidgetUpdate.columnCount()):
-                item = self.tableWidgetUpdate.item(row, col)
-                                
-                if col == 8:
-                    continue
+        search_text = self.lineEditSearchUpdate.text().strip()
+        self.proxy_modelUpdates.setFilterFixedString(search_text)
+    
+    def eventFilter(self, obj, event):
+        if obj == self.tableTitles.viewport(): 
+            if event.type() == QtCore.QEvent.Type.Leave:
+                self.tableTitles.viewport().setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.ArrowCursor))
+        elif event.type() == QtCore.QEvent.Type.MouseMove:
+            index = self.tableTitles.indexAt(event.pos())
+            if index.column() == 6:  # URL column
+                self.tableTitles.viewport().setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+            else:
+                self.tableTitles.viewport().setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.ArrowCursor))
+        return super().eventFilter(obj, event)
                 
-                if item and search_text in item.text().lower():
-                    row_found = True
-                    item.setBackground(QBrush(QColor(255, 255, 0)))
-                    item.setForeground(QBrush(QColor('black')))
-                    break
+class TitlesTableModel(QtCore.QAbstractTableModel):
+    def __init__(self, data, parent=None):
+        super().__init__(parent)
+        self._data = data
+        self.headers = ["T. ID", "Name", "Devs", "Released", "Status", "Platform", "Web Link", "Availability", "Comment", ""]
+
+    def rowCount(self, parent=QtCore.QModelIndex()):
+        return len(self._data)
+
+    def columnCount(self, parent=QtCore.QModelIndex()):
+        return len(self.headers)
+
+    def data(self, index, role=QtCore.Qt.ItemDataRole.DisplayRole):
+        if not index.isValid():
+            return None
+        row = index.row()
+        col = index.column()
+        record = self._data[row]
+
+        if role == QtCore.Qt.ItemDataRole.DisplayRole:
+            if col == 0:
+                return record[0]
+            elif col == 1:
+                return record[1]
+            elif col == 2:
+                devs = []
+                if record[2]:
+                    devs.append(f"{record[2]} [aka] {record[11]}" if record[11] else record[2])
+                if record[3]:
+                    devs.append(f"{record[3]} [aka] {record[12]}" if record[12] else record[3])
+                return "\n".join(devs)
+            elif col == 3:
+                return record[4]
+            elif col == 4:
+                return record[5]
+            elif col == 5:
+                return record[6]
+            elif col == 6:
+                return record[7]  # display text
+            elif col == 7:
+                return record[9]
+            elif col == 8:
+                return record[10]
+            elif col == 9:
+                return "⋮"
+        elif role == QtCore.Qt.ItemDataRole.UserRole:
+            if col == 0:
+                return int(record[0])
+            return record  # full row data for potential use
+        return None
+
+    def headerData(self, section, orientation, role):
+        if orientation == QtCore.Qt.Orientation.Horizontal and role == QtCore.Qt.ItemDataRole.DisplayRole:
+            return self.headers[section]
+        return super().headerData(section, orientation, role)
+    
+    def sort(self, column: int, order: QtCore.Qt.SortOrder):
+        self.layoutAboutToBeChanged.emit()
+        
+        def sort_key(row):
+            # Customize based on column
+            if column == 0:  # T. ID
+                return int(row[0]) if row[0] else -1
+            elif column == 1:  # Name
+                return row[1].lower()
+            elif column == 2:  # Devs
+                devs = []
+                if row[2]:
+                    devs.append(f"{row[2]} [aka] {row[11]}" if row[11] else row[2])
+                if row[3]:
+                    devs.append(f"{row[3]} [aka] {row[12]}" if row[12] else row[3])
+                return "\n".join(devs).lower()
+            elif column == 3:  # Released
+                return QtCore.QDate.fromString(row[4], "yyyy-MM-dd")
+            elif column == 4:  # Status
+                return row[5] or ""
+            elif column == 5:  # Platform
+                return row[6] or ""
+            elif column == 6:  # Web Link Text
+                return row[7] or ""
+            elif column == 7:  # Availability
+                return row[9] or ""
+            elif column == 8:  # Comment
+                return row[10] or ""
+            elif column == 9:
+                return
+            else:
+                return "" # skip action column
+            
+        self._data.sort(key=sort_key, reverse=(order == QtCore.Qt.SortOrder.DescendingOrder))
+        self.layoutChanged.emit()
+
+class UpdatesTableModel(QtCore.QAbstractTableModel):
+    def __init__(self, data, parent=None):
+        super().__init__(parent)
+        self._data = data
+        self.headers = ["U. ID", "T. ID", "Title", "Version", "Released", "Update Status", "Play Status", "Comment", ""]
+        
+    def rowCount(self, parent=QtCore.QModelIndex()):
+        return len(self._data)
+
+    def columnCount(self, parent=QtCore.QModelIndex()):
+        return len(self.headers)
+    
+    def data(self, index, role=QtCore.Qt.ItemDataRole.DisplayRole):
+        if not index.isValid():
+            return None
+        row = index.row()
+        col = index.column()
+        record = self._data[row]
+
+        if role == QtCore.Qt.ItemDataRole.DisplayRole:
+            if col == 0:
+                return str(record[0]) # UID
+            elif col == 1:
+                return str(record[1]) # TID
+            elif col == 2:
+                return record[2] # TName
+            elif col == 3:
+                return record[3] # Update/Version
+            elif col == 4:
+                return record[4] # Rel
+            elif col == 5:
+                return record[5] # UpdateStatus
+            elif col == 6:
+                return record[6] # PlayStatus
+            elif col == 7:
+                return record[7] # Comment
+            elif col == 8:
+                return "⋮"
+        elif role == QtCore.Qt.ItemDataRole.UserRole:
+            return record  # full row data for potential use
+        return None
+    
+    def headerData(self, section, orientation, role):
+        if orientation == QtCore.Qt.Orientation.Horizontal and role == QtCore.Qt.ItemDataRole.DisplayRole:
+            return self.headers[section]
+        return super().headerData(section, orientation, role)
+    
+    def sort(self, column: int, order: QtCore.Qt.SortOrder):
+        self.layoutAboutToBeChanged.emit()
+        
+        def sort_key(row):
+            # Customize based on column
+            if column == 0:  # U. ID
+                return int(row[0])
+            elif column == 1:  # T. ID
+                return int(row[1])
+            elif column == 2:  # TName
+                return row[2] or ""
+            elif column == 3:  # Update/Version
+                return row[3] or ""
+            elif column == 4:  # Rel
+                return QtCore.QDate.fromString(row[4], "yyyy-MM-dd") or ""
+            elif column == 5:  # UpdateStatus
+                return row[5] or ""
+            elif column == 6:  # PlayStatus
+                return row[6] or ""
+            elif column == 7:  # Comment
+                return row[7] or ""
+            else:
+                return ""  # skip action column
+            
+        self._data.sort(key=sort_key, reverse=(order == QtCore.Qt.SortOrder.DescendingOrder))
+        self.layoutChanged.emit()
+
+import webbrowser
+from urllib.parse import urlparse
+
+class HyperlinkDelegate(QtWidgets.QStyledItemDelegate):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+
+    def paint(self, painter, option, index):
+        if index.column() == 6:
+            text = index.data(QtCore.Qt.ItemDataRole.DisplayRole)
+            painter.save()
+            painter.setPen(QtGui.QPen(QtGui.QColor('blue')))
+            font = option.font
+            font.setUnderline(True)
+            painter.setFont(font)
+            rect = option.rect.adjusted(4, 0, -4, 0)  # Optional padding
+            painter.drawText(rect, QtCore.Qt.AlignmentFlag.AlignVCenter | QtCore.Qt.AlignmentFlag.AlignLeft, text)
+            painter.restore()
+        else:
+            super().paint(painter, option, index)
+
+    def editorEvent(self, event, model, option, index):
+        if index.column() == 6 and event.type() == QtCore.QEvent.Type.MouseButtonRelease:
+            if event.button() == QtCore.Qt.MouseButton.LeftButton:
+                row_data = index.data(QtCore.Qt.ItemDataRole.UserRole)
+                url = row_data[8]  # actual URL
+                if url and HyperlinkDelegate.is_valid_url(url):
+                    webbrowser.open(url)
                 else:
-                    item.setForeground(QBrush())
-                    item.setBackground(QBrush())
-                    pass
-            self.tableWidgetUpdate.setRowHidden(row, not row_found)
+                    QtWidgets.QMessageBox.warning(None, "Invalid Link", f"Invalid URL:\n{url}")
+        return super().editorEvent(event, model, option, index)
+
+    def helpEvent(self, event, view, option, index):
+        if index.column() == 6:
+            row_data = index.data(QtCore.Qt.ItemDataRole.UserRole)
+            url = row_data[8]
+            if url:
+                QtWidgets.QToolTip.showText(event.globalPos(), url)
+            view.viewport().setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+            return True
+        return super().helpEvent(event, view, option, index)
+
+    @staticmethod
+    def is_valid_url(url: str) -> bool:
+        try:
+            result = urlparse(url)
+            return all([result.scheme, result.netloc])
+        except:
+            return False
