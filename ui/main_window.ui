@@ -1614,7 +1614,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QTableWidget" name="tableWidgetTitles">
+         <widget class="QTableView" name="tableTitles">
           <property name="font">
            <font>
             <pointsize>10</pointsize>
@@ -1658,9 +1658,6 @@
           </property>
           <property name="cornerButtonEnabled">
            <bool>true</bool>
-          </property>
-          <property name="columnCount">
-           <number>0</number>
           </property>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
@@ -1746,7 +1743,7 @@
          </layout>
         </item>
         <item>
-         <widget class="QTableWidget" name="tableWidgetUpdate">
+         <widget class="QTableView" name="tableUpdates">
           <property name="font">
            <font>
             <pointsize>10</pointsize>
@@ -1766,12 +1763,6 @@
           </property>
           <property name="cornerButtonEnabled">
            <bool>true</bool>
-          </property>
-          <property name="rowCount">
-           <number>0</number>
-          </property>
-          <property name="columnCount">
-           <number>0</number>
           </property>
           <attribute name="verticalHeaderVisible">
            <bool>false</bool>
