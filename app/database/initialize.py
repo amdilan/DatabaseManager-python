@@ -191,7 +191,10 @@ def InitializeDB(dblocation):
         WHEN NEW.update_status != 1
         BEGIN
             UPDATE titles
-            SET availability = 0
+            SET availability = CASE
+                WHEN (SELECT COUNT(*) FROM updates WHERE title_id = NEW.title_id AND update_status = 1) = 0 THEN 0
+                ELSE 1
+            END
             WHERE id = NEW.title_id;
         END;
         '''
