@@ -167,9 +167,13 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         self.modelTitles = TitlesTableModel(titles)
         self.proxy_modelTitles.setSourceModel(self.modelTitles)
+        self.tableTitles.setSortingEnabled(False)
         self.tableTitles.setModel(self.proxy_modelTitles)
-        self.tableTitles.setWordWrap(True)
-        self.tableTitles.verticalHeader().setDefaultAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
+        
+        try:
+            self.proxy_modelTitles.layoutChanged.disconnect()
+        except:
+            pass
         
         self.tableTitles.setStyleSheet("""
             QTableView {
@@ -180,42 +184,64 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             }
         """)
 
-        self.tableTitles.setSortingEnabled(False)
-        # Add tool buttons for the last column
-        for row in range(self.modelTitles.rowCount()):
-            tool_button = QtWidgets.QToolButton()
-            tool_button.setText("⋮")
-            tool_button.setStyleSheet("QToolButton::menu-indicator { image: none; }")
-            menu = QtWidgets.QMenu()
-            edit_action = menu.addAction("Edit")
-            delete_action = menu.addAction("Delete")
-            edit_action.triggered.connect(lambda _, r=row: self.edit_title(r))
-            delete_action.triggered.connect(lambda _, r=row: self.delete_title(r))
-            tool_button.setMenu(menu)
-            tool_button.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.InstantPopup)
-            tool_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
-            self.tableTitles.setIndexWidget(
-                self.proxy_modelTitles.index(row, self.modelTitles.columnCount()-1),
-                tool_button
-            )
-
         self.tableTitles.setSortingEnabled(True)
+        self.proxy_modelTitles.layoutChanged.connect(self.AssignButtonsTitles)
+        self.AssignButtonsTitles()
         self.tableTitles.sortByColumn(0, QtCore.Qt.SortOrder.AscendingOrder)
         self.tableTitles.setItemDelegateForColumn(6, HyperlinkDelegate(self.tableTitles))
         self.tableTitles.viewport().setMouseTracking(True)
         self.tableTitles.viewport().installEventFilter(self)
+        self.tableTitles.setWordWrap(True)
+        self.tableTitles.verticalHeader().setDefaultAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
         self.tableTitles.resizeColumnsToContents()
         self.tableTitles.resizeRowsToContents()
         # self.tableTitles.clicked.connect(self.open_link)
+        
+    def AssignButtonsTitles(self):
+        # Clear existing buttons
+        for row in range(self.proxy_modelTitles.rowCount()):
+            self.tableTitles.setIndexWidget(
+                self.proxy_modelTitles.index(row, self.proxy_modelTitles.columnCount()-1),
+                None
+        )
+        
+        # Add tool buttons for the last column
+        for row in range(self.proxy_modelTitles.rowCount()):
+            tool_button = QtWidgets.QToolButton()
+            proxy_index = self.proxy_modelTitles.index(row, 0)
+            persistent_index = QtCore.QPersistentModelIndex(proxy_index)
+                        
+            tool_button.setText("⋮")
+            tool_button.setStyleSheet("QToolButton::menu-indicator { image: none; }")
+            
+            menu = QtWidgets.QMenu()
+            edit_action = menu.addAction("Edit")
+            delete_action = menu.addAction("Delete")
+            
+            edit_action.triggered.connect(lambda _, r=persistent_index: self.edit_title(r))
+            delete_action.triggered.connect(lambda _, r=persistent_index: self.delete_title(r))
+            
+            tool_button.setMenu(menu)
+            tool_button.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.InstantPopup)
+            tool_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+            
+            self.tableTitles.setIndexWidget(
+                self.proxy_modelTitles.index(row, self.proxy_modelTitles.columnCount()-1),
+                tool_button
+            )
         
     def PopulateUpdates(self):
         update = app.GetUpdateDetails(DB)
         
         self.modelUpdates = UpdatesTableModel(update)
         self.proxy_modelUpdates.setSourceModel(self.modelUpdates)
+        self.tableTitles.setSortingEnabled(False)
         self.tableUpdates.setModel(self.proxy_modelUpdates)
-        self.tableUpdates.setWordWrap(True)
-        self.tableUpdates.verticalHeader().setDefaultAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
+        
+        try:
+            self.proxy_modelUpdates.layoutChanged.disconnect()
+        except:
+            pass
         
         self.tableUpdates.setStyleSheet("""
             QTableView {
@@ -226,41 +252,64 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             }
         """)
         
-        self.tableTitles.setSortingEnabled(False)
-        # Add tool buttons for the last column
-        for row in range(self.modelUpdates.rowCount()):
-            tool_button = QtWidgets.QToolButton()
-            tool_button.setText("⋮")
-            tool_button.setStyleSheet("QToolButton::menu-indicator { image: none; }")
-            menu = QtWidgets.QMenu()
-            edit_action = menu.addAction("Edit")
-            delete_action = menu.addAction("Delete")
-            edit_action.triggered.connect(lambda _, r=row: self.edit_update(r))
-            delete_action.triggered.connect(lambda _, r=row: self.delete_update(r))
-            tool_button.setMenu(menu)
-            tool_button.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.InstantPopup)
-            tool_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
-            self.tableUpdates.setIndexWidget(
-                self.proxy_modelUpdates.index(row, self.modelUpdates.columnCount()-1),
-                tool_button
-            )
-            
         self.tableUpdates.setSortingEnabled(True)
+        self.proxy_modelUpdates.layoutChanged.connect(self.AssignButtonsUpdates)
+        self.AssignButtonsUpdates()
+        self.tableUpdates.setWordWrap(True)
         self.tableUpdates.sortByColumn(0, QtCore.Qt.SortOrder.AscendingOrder)
+        self.tableUpdates.verticalHeader().setDefaultAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
         self.tableUpdates.resizeColumnsToContents()
         self.tableUpdates.resizeRowsToContents()
         
+    def AssignButtonsUpdates(self):
+        # Clear existing buttons
+        for row in range(self.proxy_modelUpdates.rowCount()):
+            self.tableUpdates.setIndexWidget(
+                self.proxy_modelUpdates.index(row, self.proxy_modelUpdates.columnCount()-1),
+                None
+        )
+            
+        for row in range(self.proxy_modelUpdates.rowCount()):
+            tool_button = QtWidgets.QToolButton()
+            proxy_index = self.proxy_modelUpdates.index(row, 0)
+            persistent_index = QtCore.QPersistentModelIndex(proxy_index)
+            
+            tool_button.setText("⋮")
+            tool_button.setStyleSheet("QToolButton::menu-indicator { image: none; }")
+            
+            menu = QtWidgets.QMenu()
+            edit_action = menu.addAction("Edit")
+            delete_action = menu.addAction("Delete")
+            
+            edit_action.triggered.connect(lambda _, r=persistent_index: self.edit_update(r))
+            delete_action.triggered.connect(lambda _, r=persistent_index: self.delete_update(r))
+            
+            tool_button.setMenu(menu)
+            tool_button.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.InstantPopup)
+            tool_button.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+            
+            self.tableUpdates.setIndexWidget(
+                self.proxy_modelUpdates.index(row, self.proxy_modelUpdates.columnCount()-1),
+                tool_button
+            )
+    
     def edit_title(self, row):
         # print(f"Editing row {row}")
-        if row < 0 or row >= self.modelTitles.rowCount():
+        if not row.isValid():
             return
-        index = self.modelTitles.index(row, 0)
-        row_data = index.data(QtCore.Qt.ItemDataRole.UserRole)
+        # proxy_index = self.proxy_modelTitles.index(row, 0)
+        # source_index = self.proxy_modelTitles.mapToSource(proxy_index)
+        proxy_index = QtCore.QModelIndex(row)
+        source_index = self.proxy_modelTitles.mapToSource(proxy_index)
+        if not source_index.isValid():
+            return
+        row_data = self.modelTitles.data(source_index, QtCore.Qt.ItemDataRole.UserRole)
         if not row_data:
             return
-        dlg = app.EditTitleDialog(data=row_data)
-        dlg.exec()
-        self.PopulateTitles()
+        # print(f'title edit data: {row_data}')
+        dlg = app.EditTitleDialog(data=row_data[0], parent=self)
+        if dlg.exec() == QtWidgets.QDialog.DialogCode.Accepted:
+            self.PopulateTitles()
     
     def delete_title(self, row):
         # print(f"Deleting row {row}")
@@ -269,7 +318,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         index = self.modelTitles.index(row, 0)
         reply = QtWidgets.QMessageBox.question(
             self, 'Delete Title', 
-            'Are you sure you want to delete this title?',
+            f'Are you sure you want to delete this title?',
             QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No
         )
         if reply == QtWidgets.QMessageBox.StandardButton.Yes:
@@ -294,12 +343,16 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
     def edit_update(self, row):
         # print(f"Editing row {row}")
-        if row < 0 or row >= self.modelUpdates.rowCount():
+        if not row:
             return
-        index = self.modelUpdates.index(row, 0)
-        row_data = index.data(QtCore.Qt.ItemDataRole.UserRole)
+        proxy_index = QtCore.QModelIndex(row)
+        source_index = self.proxy_modelUpdates.mapToSource(proxy_index)
+        if not source_index.isValid():
+            return
+        row_data = self.modelUpdates.data(source_index, QtCore.Qt.ItemDataRole.UserRole)
         if not row_data:
             return
+        # print(row_data)
         dlg = app.EditUpdateDialog(data=row_data[0])
         dlg.exec()
         self.PopulateUpdates()
@@ -350,10 +403,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def filterTableTitle(self):
         search_text = self.lineEditSearchTitle.text().strip()
         self.proxy_modelTitles.setFilterFixedString(search_text)
+        self.AssignButtonsTitles()
             
     def filterTableUpdate(self):
         search_text = self.lineEditSearchUpdate.text().strip()
         self.proxy_modelUpdates.setFilterFixedString(search_text)
+        self.AssignButtonsUpdates()
     
     def eventFilter(self, obj, event):
         if obj == self.tableTitles.viewport(): 
@@ -413,8 +468,6 @@ class TitlesTableModel(QtCore.QAbstractTableModel):
             elif col == 9:
                 return "⋮"
         elif role == QtCore.Qt.ItemDataRole.UserRole:
-            if col == 0:
-                return int(record[0])
             return record  # full row data for potential use
         return None
 

@@ -113,6 +113,7 @@ class NewTitleDialog(QtWidgets.QDialog, Ui_NewTitleDialog):
             dlg.setIcon(QtWidgets.QMessageBox.Icon.Information)
             dlg.exec()
             self.close()
+            super().accept()
         else:
             dlg.setText("Title Addition Failure!")
             dlg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)

@@ -185,6 +185,7 @@ class EditTitleDialog(QtWidgets.QDialog, Ui_EditTitleDialog):
             dlg.setIcon(QtWidgets.QMessageBox.Icon.Information)
             dlg.exec()
             self.close()
+            super().accept()
         else:
             dlg.setText("Title Edition Failure!")
             dlg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)

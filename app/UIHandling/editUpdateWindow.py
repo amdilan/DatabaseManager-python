@@ -124,6 +124,7 @@ class EditUpdateDialog(QtWidgets.QDialog, Ui_EditUpdateDialog):
             dlg.setIcon(QtWidgets.QMessageBox.Icon.Information)
             dlg.exec()
             self.close()
+            super().accept()
         else:
             dlg.setText("Update Edition Failure!")
             dlg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
