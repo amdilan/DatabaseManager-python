@@ -313,20 +313,21 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     
     def delete_title(self, row):
         # print(f"Deleting row {row}")
-        if row < 0 or row >= self.modelTitles.rowCount():
+        if not row:
             return
-        index = self.modelTitles.index(row, 0)
+        proxy_index = QtCore.QModelIndex(row)
+        source_index = self.proxy_modelTitles.mapToSource(proxy_index)
+        row_data = self.modelTitles.data(source_index, QtCore.Qt.ItemDataRole.UserRole)
         reply = QtWidgets.QMessageBox.question(
             self, 'Delete Title', 
-            f'Are you sure you want to delete this title?',
+            f"Are you sure you want to delete this title?\n{row_data[0]} — {row_data[1]}",
             QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No
         )
         if reply == QtWidgets.QMessageBox.StandardButton.Yes:
             # Delete logic here
-            row_data = index.data(QtCore.Qt.ItemDataRole.UserRole)
             if not row_data:
                 return
-            result = app.DeleteTitle(DB, row_data)
+            result = app.DeleteTitle(DB, row_data[0])
             dlg = QtWidgets.QMessageBox(self)
             dlg.setWindowTitle('Deleting Title')
             if (result['success']):
@@ -359,17 +360,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     
     def delete_update(self, row):
         # print(f"Deleting row {row}")
-        if row < 0 or row >= self.modelUpdates.rowCount():
+        if not row:
             return
-        index = self.modelUpdates.index(row, 0)
+        proxy_index = QtCore.QModelIndex(row)
+        source_index = self.proxy_modelUpdates.mapToSource(proxy_index)
+        row_data = self.modelUpdates.data(source_index, QtCore.Qt.ItemDataRole.UserRole)
         reply = QtWidgets.QMessageBox.question(
             self, 'Delete Update', 
-            'Are you sure you want to delete this update?',
+            f"Are you sure you want to delete this update?\nTitle: {row_data[1]} - {row_data[2]}\nUpdate: {row_data[0]} - {row_data[3]}",
             QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No
         )
         if reply == QtWidgets.QMessageBox.StandardButton.Yes:
             # Delete logic here
-            row_data = index.data(QtCore.Qt.ItemDataRole.UserRole)
             if not row_data:
                 return
             result = app.DeleteUpdate(DB, row_data[0])
