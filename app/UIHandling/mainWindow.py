@@ -535,9 +535,9 @@ class UpdatesTableModel(QtCore.QAbstractTableModel):
 
         if role == QtCore.Qt.ItemDataRole.DisplayRole:
             if col == 0:
-                return str(record[0]) # UID
+                return record[0] # UID
             elif col == 1:
-                return str(record[1]) # TID
+                return record[1] # TID
             elif col == 2:
                 return record[2] # TName
             elif col == 3:
@@ -567,9 +567,9 @@ class UpdatesTableModel(QtCore.QAbstractTableModel):
         def sort_key(row):
             # Customize based on column
             if column == 0:  # U. ID
-                return int(row[0])
+                return int(row[0]) if row[0] else -1
             elif column == 1:  # T. ID
-                return int(row[1])
+                return int(row[0]) if row[0] else -1
             elif column == 2:  # TName
                 return row[2] or ""
             elif column == 3:  # Update/Version
