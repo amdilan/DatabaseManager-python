@@ -1,6 +1,6 @@
 """
 Author: Luan Dias - https://github.com/luandiasrj
-Url: https://github.com/luandiasrj/QToggle_-_Advanced_QCheckbox_for_PyQT6
+Url: https://github.com/luandiasrj/QToggle_-_Advanced_QCheckbox_for_PySide6
 
 This code implements a custom QToggle class, which is a toggle switch derived
 from QCheckBox. The QToggle class features customizable colors, and properties.
@@ -30,11 +30,11 @@ The example demonstrates how to use the QToggle class by creating three
 different toggles with various settings such as custom height, colors, and font.
 """
 
-from PyQt6.QtCore import Qt, QRect, pyqtProperty, QPropertyAnimation, QPoint, \
+from PySide6.QtCore import Qt, QRect, pyqtProperty, QPropertyAnimation, QPoint, \
     QEasingCurve
-from PyQt6.QtGui import QColor, QFontMetrics, QPainter, QPainterPath, QBrush, \
+from PySide6.QtGui import QColor, QFontMetrics, QPainter, QPainterPath, QBrush, \
     QPen, QFont
-from PyQt6.QtWidgets import QApplication, QWidget, QCheckBox, QVBoxLayout
+from PySide6.QtWidgets import QApplication, QWidget, QCheckBox, QVBoxLayout
 
 
 class QToggle(QCheckBox):

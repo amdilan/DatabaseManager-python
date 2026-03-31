@@ -1,5 +1,5 @@
-from PyQt6 import QtWidgets
-from PyQt6.QtCore import Qt
+from PySide6 import QtWidgets
+from PySide6.QtCore import Qt
 
 from ui.add_new_title_window import Ui_NewTitleDialog
 import app

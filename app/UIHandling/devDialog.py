@@ -1,6 +1,6 @@
-from PyQt6 import QtWidgets
-from PyQt6.QtCore import Qt, QUrl
-from PyQt6.QtGui import QDesktopServices
+from PySide6 import QtWidgets
+from PySide6.QtCore import Qt, QUrl
+from PySide6.QtGui import QDesktopServices
 
 from ui.Devs_dialog import Ui_DevDialog
 import app

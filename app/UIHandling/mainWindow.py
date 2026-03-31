@@ -1,6 +1,6 @@
-from PyQt6 import QtWidgets, QtCore, QtGui
-from PyQt6.QtCore import Qt, QUrl, QTimer
-from PyQt6.QtGui import QDesktopServices, QColor, QBrush
+from PySide6 import QtWidgets, QtCore, QtGui
+from PySide6.QtCore import Qt, QUrl, QTimer
+from PySide6.QtGui import QDesktopServices, QColor, QBrush
 
 from ui.main_window import Ui_MainWindow
 import app

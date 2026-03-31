@@ -1,6 +1,6 @@
-from PyQt6.QtWidgets import QStyledItemDelegate, QStyleOptionViewItem, QStyle, QApplication
-from PyQt6.QtGui import QTextDocument, QPalette
-from PyQt6.QtCore import QRect, QSize, Qt, QSizeF
+from PySide6.QtWidgets import QStyledItemDelegate, QStyleOptionViewItem, QStyle, QApplication
+from PySide6.QtGui import QTextDocument, QPalette
+from PySide6.QtCore import QRect, QSize, Qt, QSizeF
 
 class HTMLDelegate(QStyledItemDelegate):
     def paint(self, painter, option, index):

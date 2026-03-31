@@ -16,5 +16,11 @@
     "UTNP",
     "UTPD",
     "VARCHAR"
-  ]
+  ],
+  "python.languageServer": "Pylance",
+  "python.analysis.diagnosticSeverityOverrides": {
+    "reportMissingModuleSource": "none",
+    "reportShadowedImports": "none"
+  },
+  "python-envs.defaultEnvManager": "ms-python.python:venv"
 }

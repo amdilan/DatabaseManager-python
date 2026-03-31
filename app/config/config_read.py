@@ -1,7 +1,7 @@
 import os
 import sys
 import configparser
-from PyQt6 import QtWidgets
+from PySide6 import QtWidgets
 
 # CONFIG_FILE = "../../data/config.ini"
 

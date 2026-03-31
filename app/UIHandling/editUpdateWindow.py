@@ -1,5 +1,5 @@
-from PyQt6 import QtWidgets
-from PyQt6.QtCore import Qt, QDate
+from PySide6 import QtWidgets
+from PySide6.QtCore import Qt, QDate
 
 from ui.edit_update_window import Ui_EditUpdateDialog
 import app

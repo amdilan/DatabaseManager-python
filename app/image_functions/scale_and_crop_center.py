@@ -1,5 +1,5 @@
-from PyQt6.QtGui import QPixmap
-from PyQt6.QtCore import Qt, QSize
+from PySide6.QtGui import QPixmap
+from PySide6.QtCore import Qt, QSize
 
 
 def ScaleAndCropCenter(pixmap: QPixmap, target_size: QSize) -> QPixmap:
