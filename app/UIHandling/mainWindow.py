@@ -1,5 +1,5 @@
 from PySide6 import QtWidgets, QtCore, QtGui
-from PySide6.QtCore import Qt, QUrl, QTimer
+from PySide6.QtCore import QProcess, Qt, QUrl, QTimer
 from PySide6.QtGui import QDesktopServices, QColor, QBrush
 
 from ui.main_window import Ui_MainWindow
@@ -48,11 +48,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.search_timerUpdate.setSingleShot(True)
         self.search_timerUpdate.timeout.connect(self.filterTableUpdate)
         
-    def __del__(self):
+    def closeEvent(self, event):
         self.search_timer.stop()
         self.search_timerUpdate.stop()
-        del self.proxy_modelTitles
-        del self.proxy_modelUpdates
+        event.accept()
                 
     def start_search_time_Title(self):
         self.search_timer.start(300)  # 300ms delay before searching
@@ -101,11 +100,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.HandleRestart()
             
     def HandleRestart(self):
-        dlg = QtWidgets.QMessageBox.question(
-            self, 'Changing Theme',
-            "The theme change will applied after application restart.\nPlease close application, and run the application again!",
-            QtWidgets.QMessageBox.StandardButton.Ok
-        )        
+        QtWidgets.QApplication.quit()
+        QProcess.startDetached(sys.executable, sys.argv)
                     
     def HandleMenuPlatforms(self):
         dlg = app.PlatformDialog()
@@ -172,7 +168,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         try:
             self.proxy_modelTitles.layoutChanged.disconnect()
-        except:
+        except TypeError:
             pass
         
         self.tableTitles.setStyleSheet("""
@@ -218,8 +214,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             edit_action = menu.addAction("Edit")
             delete_action = menu.addAction("Delete")
             
-            edit_action.triggered.connect(lambda _, r=persistent_index: self.edit_title(r))
-            delete_action.triggered.connect(lambda _, r=persistent_index: self.delete_title(r))
+            edit_action.triggered.connect(lambda _, idx=persistent_index: self.edit_title(idx))
+            delete_action.triggered.connect(lambda _, idx=persistent_index: self.delete_title(idx))
             
             tool_button.setMenu(menu)
             tool_button.setPopupMode(QtWidgets.QToolButton.ToolButtonPopupMode.InstantPopup)
@@ -235,12 +231,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         self.modelUpdates = UpdatesTableModel(update)
         self.proxy_modelUpdates.setSourceModel(self.modelUpdates)
-        self.tableTitles.setSortingEnabled(False)
+        self.tableUpdates.setSortingEnabled(False)
         self.tableUpdates.setModel(self.proxy_modelUpdates)
         
         try:
             self.proxy_modelUpdates.layoutChanged.disconnect()
-        except:
+        except TypeError:
             pass
         
         self.tableUpdates.setStyleSheet("""
@@ -398,18 +394,18 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
     def open_link(self, row, col):
         if col == 6:
-            item = self.tableWidgetTitles.item(row, col)
+            item = self.tableTitles.model().index(row, col)
             if item and (url := item.data(Qt.ItemDataRole.UserRole)):
                 QDesktopServices.openUrl(QUrl(url))
                 
     def filterTableTitle(self):
         search_text = self.lineEditSearchTitle.text().strip()
-        self.proxy_modelTitles.setFilterFixedString(search_text)
+        self.proxy_modelTitles.setFilterRegularExpression(search_text)
         self.AssignButtonsTitles()
             
     def filterTableUpdate(self):
         search_text = self.lineEditSearchUpdate.text().strip()
-        self.proxy_modelUpdates.setFilterFixedString(search_text)
+        self.proxy_modelUpdates.setFilterRegularExpression(search_text)
         self.AssignButtonsUpdates()
     
     def eventFilter(self, obj, event):
@@ -495,7 +491,7 @@ class TitlesTableModel(QtCore.QAbstractTableModel):
                     devs.append(f"{row[3]} [aka] {row[12]}" if row[12] else row[3])
                 return "\n".join(devs).lower()
             elif column == 3:  # Released
-                return QtCore.QDate.fromString(row[4], "yyyy-MM-dd")
+                return QtCore.QDate.fromString(row[4], "yyyy-MM-dd") or ""
             elif column == 4:  # Status
                 return row[5] or ""
             elif column == 5:  # Platform
@@ -635,5 +631,5 @@ class HyperlinkDelegate(QtWidgets.QStyledItemDelegate):
         try:
             result = urlparse(url)
             return all([result.scheme, result.netloc])
-        except:
+        except TypeError:
             return False
