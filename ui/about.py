@@ -41,13 +41,13 @@ class Ui_DialogAbout(object):
         font.setPointSize(14)
         self.label_2.setFont(font)
         self.label_2.setObjectName("label_2")
-        self.labelPyQtVersion = QtWidgets.QLabel(parent=DialogAbout)
-        self.labelPyQtVersion.setGeometry(QtCore.QRect(120, 90, 180, 20))
+        self.labelPySideVersion = QtWidgets.QLabel(parent=DialogAbout)
+        self.labelPySideVersion.setGeometry(QtCore.QRect(120, 90, 180, 20))
         font = QtGui.QFont()
         font.setFamily("Segoe UI")
         font.setPointSize(10)
-        self.labelPyQtVersion.setFont(font)
-        self.labelPyQtVersion.setObjectName("labelPyQtVersion")
+        self.labelPySideVersion.setFont(font)
+        self.labelPySideVersion.setObjectName("labelPySideVersion")
         self.labelPyVersion = QtWidgets.QLabel(parent=DialogAbout)
         self.labelPyVersion.setGeometry(QtCore.QRect(120, 70, 180, 20))
         font = QtGui.QFont()
@@ -84,11 +84,11 @@ class Ui_DialogAbout(object):
         _translate = QtCore.QCoreApplication.translate
         DialogAbout.setWindowTitle(_translate("DialogAbout", "About"))
         self.label_2.setText(_translate("DialogAbout", "Python Database Manager"))
-        self.labelPyQtVersion.setText(_translate("DialogAbout", "PyQt Version"))
+        self.labelPySideVersion.setText(_translate("DialogAbout", "PySide Version"))
         self.labelPyVersion.setText(_translate("DialogAbout", "Python Version"))
         self.labelVersion.setText(_translate("DialogAbout", "Version"))
         self.labelGithub.setText(_translate("DialogAbout", "Github Link"))
-        self.labelCopyright.setText(_translate("DialogAbout", "Copyright 2025 amdilan"))
+        self.labelCopyright.setText(_translate("DialogAbout", "Copyright © 2026 amdilan"))
 
 
 if __name__ == "__main__":

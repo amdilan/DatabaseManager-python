@@ -81,7 +81,7 @@
     <string>Python Database Manager</string>
    </property>
   </widget>
-  <widget class="QLabel" name="labelPyQtVersion">
+  <widget class="QLabel" name="labelPySideVersion">
    <property name="geometry">
     <rect>
      <x>120</x>
@@ -97,7 +97,7 @@
     </font>
    </property>
    <property name="text">
-    <string>PyQt Version</string>
+    <string>PySide Version</string>
    </property>
   </widget>
   <widget class="QLabel" name="labelPyVersion">

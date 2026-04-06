@@ -11,7 +11,7 @@ class AboutDialog(QtWidgets.QDialog, Ui_DialogAbout):
         self.setupUi(self)
         
         self.labelVersion.setText(f"Version: 1.2.0")
-        self.labelPyQtVersion.setText(f"PySide6: v{qVersion()}")
+        self.labelPySideVersion.setText(f"PySide: v{qVersion()}")
         self.labelPyVersion.setText(f"Python: v{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}")
         
         self.labelGithub.setText('<a href="https://github.com/amdilan/DatabaseManager-python">Github.com</a>')
